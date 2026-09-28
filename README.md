@@ -1,6 +1,6 @@
 # Marine Guide Demo — Neos CMS
 
-A Neos CMS project with a minimal `Collection.Site` homepage, ready for collection content models, audience-specific templates, and editorial workflows.
+A Neos CMS demo built with the `Collection.Site` package. The marine guide uses a hawksbill turtle to demonstrate a slide-based experience for large displays, conservation actions, research evidence, and interactive questions. The guide supports English and Traditional Chinese content.
 
 ## Getting started
 
@@ -14,6 +14,8 @@ Install Docker with Compose support, VS Code, and the Dev Containers extension o
 The Dev Container uses `compose.yaml` to start the application and database. You do not need to run `docker compose up` separately. Run all PHP, Composer, and Flow commands in the VS Code terminal inside the Dev Container.
 
 For a fresh checkout of this version, temporarily set `"overrideCommand": true` in `.devcontainer/devcontainer.json` before reopening. This keeps the container running while you install dependencies and initialize the site.
+
+The Traditional Chinese route is `/zh`.
 
 ## Initial setup
 
@@ -45,6 +47,8 @@ Create a local administrator inside the Dev Container:
 ```bash
 ./flow user:create <username> <password> <first-name> <last-name> --roles Administrator
 ```
+
+A new site starts with demo defaults defined in the NodeTypes. To provide bilingual content, create the language variants in the Neos backend and edit their translations.
 
 ## Development measurement
 
