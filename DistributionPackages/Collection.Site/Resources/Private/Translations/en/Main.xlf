@@ -234,6 +234,50 @@
         <source>Read the evidence</source>
         <target>Read the evidence</target>
       </trans-unit>
+      <trans-unit id="deck.previous">
+        <source>Previous</source>
+        <target>Previous</target>
+      </trans-unit>
+      <trans-unit id="deck.next">
+        <source>Next</source>
+        <target>Next</target>
+      </trans-unit>
+      <trans-unit id="deck.home">
+        <source>Start over</source>
+        <target>Start over</target>
+      </trans-unit>
+      <trans-unit id="deck.cover">
+        <source>Meet the hawksbill</source>
+        <target>Meet the hawksbill</target>
+      </trans-unit>
+      <trans-unit id="deck.observe">
+        <source>Look closer</source>
+        <target>Look closer</target>
+      </trans-unit>
+      <trans-unit id="deck.story">
+        <source>Your perspective</source>
+        <target>Your perspective</target>
+      </trans-unit>
+      <trans-unit id="deck.quiz">
+        <source>Try a question</source>
+        <target>Try a question</target>
+      </trans-unit>
+      <trans-unit id="deck.actions">
+        <source>Choose your actions</source>
+        <target>Choose your actions</target>
+      </trans-unit>
+      <trans-unit id="deck.sources">
+        <source>Sources &amp; credits</source>
+        <target>Sources &amp; credits</target>
+      </trans-unit>
+      <trans-unit id="deck.more">
+        <source>Keep wondering</source>
+        <target>Keep wondering</target>
+      </trans-unit>
+      <trans-unit id="deck.navigation">
+        <source>Guide pages</source>
+        <target>Guide pages</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

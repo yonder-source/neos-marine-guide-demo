@@ -128,10 +128,10 @@
     const main = guide.closest('main');
     const hero = main?.querySelector('.hero');
     if (!hero || document.body.classList.contains('neos-backend')) return;
-    const english = document.documentElement.lang.startsWith('en');
-    const words = english
-      ? {previous:'Previous', next:'Next', home:'Start over', cover:'Meet the hawksbill', observe:'Look closer', story:'Your perspective', quiz:'Try a question', actions:'Choose your actions', sources:'Sources & credits', more:'Keep wondering'}
-      : {previous:'上一頁', next:'下一頁', home:'回到開場', cover:'遇見玳瑁', observe:'觀察玳瑁', story:'你的觀點', quiz:'情境挑戰', actions:'選擇保育行動', sources:'資料與圖片來源', more:'繼續想一想'};
+    const words = Object.fromEntries(
+      ['previous', 'next', 'home', 'cover', 'observe', 'story', 'quiz', 'actions', 'sources', 'more', 'navigation']
+        .map(key => [key, guide.getAttribute(`data-deck-${key}`)])
+    );
     // Keep the existing audience controls visible on the cover and every slide.
     guide.querySelector('[data-audience-switch]').after(hero);
     document.body.classList.add('guide-deck');
@@ -182,7 +182,7 @@
     add(guide.querySelector('.sources'), words.sources);
     const nav = document.createElement('nav');
     nav.className = 'deck-navigation';
-    nav.setAttribute('aria-label', english ? 'Guide pages' : '導覽分頁');
+    nav.setAttribute('aria-label', words.navigation);
     const button = (label, fn) => {
       const el = document.createElement('button'); el.type='button'; el.textContent=label;
       el.addEventListener('click', fn); nav.append(el); return el;

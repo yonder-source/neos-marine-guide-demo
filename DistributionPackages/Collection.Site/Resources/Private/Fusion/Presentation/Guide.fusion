@@ -3,7 +3,19 @@ prototype(Collection.Site:Presentation.Guide) < prototype(Neos.Fusion:Component)
   id = ${'marine-' + node.aggregateId.value}
   imageUri = Collection.Site:Presentation.GuideImageUri
   renderer = afx`
-    <article class="guide" data-guide data-initial-audience="adult" id={props.id}>
+    <article class="guide" data-guide data-initial-audience="adult" id={props.id}
+      data-deck-previous={MarineGuide.label('deck.previous', documentNode)}
+      data-deck-next={MarineGuide.label('deck.next', documentNode)}
+      data-deck-home={MarineGuide.label('deck.home', documentNode)}
+      data-deck-cover={MarineGuide.label('deck.cover', documentNode)}
+      data-deck-observe={MarineGuide.label('deck.observe', documentNode)}
+      data-deck-story={MarineGuide.label('deck.story', documentNode)}
+      data-deck-quiz={MarineGuide.label('deck.quiz', documentNode)}
+      data-deck-actions={MarineGuide.label('deck.actions', documentNode)}
+      data-deck-sources={MarineGuide.label('deck.sources', documentNode)}
+      data-deck-more={MarineGuide.label('deck.more', documentNode)}
+      data-deck-navigation={MarineGuide.label('deck.navigation', documentNode)}
+    >
       <header class="guide-heading">
         <div><p class="eyebrow">FIELD NOTES / 01 <span>{String.htmlSpecialChars(props.data.category)}</span></p><h2>{String.htmlSpecialChars(props.data.guideTitle)}</h2></div>
         <p class="reading-time"><span aria-hidden="true">◷</span> <Collection.Site:Presentation.Label labelKey="duration.before" /> {String.htmlSpecialChars(props.data.duration)} <Collection.Site:Presentation.Label labelKey="duration.after" /></p>

@@ -234,6 +234,50 @@
         <source>Read the evidence</source>
         <target>查核資料與保育成效</target>
       </trans-unit>
+      <trans-unit id="deck.previous">
+        <source>Previous</source>
+        <target>上一頁</target>
+      </trans-unit>
+      <trans-unit id="deck.next">
+        <source>Next</source>
+        <target>下一頁</target>
+      </trans-unit>
+      <trans-unit id="deck.home">
+        <source>Start over</source>
+        <target>回到開場</target>
+      </trans-unit>
+      <trans-unit id="deck.cover">
+        <source>Meet the hawksbill</source>
+        <target>遇見玳瑁</target>
+      </trans-unit>
+      <trans-unit id="deck.observe">
+        <source>Look closer</source>
+        <target>觀察玳瑁</target>
+      </trans-unit>
+      <trans-unit id="deck.story">
+        <source>Your perspective</source>
+        <target>你的觀點</target>
+      </trans-unit>
+      <trans-unit id="deck.quiz">
+        <source>Try a question</source>
+        <target>情境挑戰</target>
+      </trans-unit>
+      <trans-unit id="deck.actions">
+        <source>Choose your actions</source>
+        <target>選擇保育行動</target>
+      </trans-unit>
+      <trans-unit id="deck.sources">
+        <source>Sources &amp; credits</source>
+        <target>資料與圖片來源</target>
+      </trans-unit>
+      <trans-unit id="deck.more">
+        <source>Keep wondering</source>
+        <target>繼續想一想</target>
+      </trans-unit>
+      <trans-unit id="deck.navigation">
+        <source>Guide pages</source>
+        <target>導覽分頁</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>
