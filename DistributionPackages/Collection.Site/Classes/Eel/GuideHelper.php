@@ -39,12 +39,15 @@ final class GuideHelper implements ProtectedContextAwareInterface
                 $values[$name] = $this->publicUrl($value);
             }
         }
+        $audience = $node->dimensionSpacePoint->coordinates['audience'] ?? 'adult';
+        $values['audience'] = $audience;
         foreach (['observationOneX', 'observationOneY', 'observationTwoX', 'observationTwoY'] as $name) {
             $values[$name] = max(8, min(88, (int) ($values[$name] ?? 50)));
         }
-        $values['actions'] = $this->sections($values, 'action', ['One', 'Two', 'Three'], ['Title', 'Body', 'Link', 'Url']);
-        $values['metrics'] = $this->sections($values, 'metric', ['One', 'Two', 'Three'], ['Value', 'Label', 'Scope']);
-        $values['evidence'] = $this->sections($values, 'evidence', ['One', 'Two', 'Three', 'Four', 'Five'], ['Title', 'Body', 'SourceTitle', 'SourceUrl', 'SecondaryTitle', 'SecondaryUrl']);
+        $values['actions'] = $audience === 'adult' ? $this->sections($values, 'action', ['One', 'Two', 'Three'], ['Title', 'Body', 'Link', 'Url']) : [];
+        $values['metrics'] = $audience === 'expert' ? $this->sections($values, 'metric', ['One', 'Two', 'Three'], ['Value', 'Label', 'Scope']) : [];
+        $values['evidence'] = $audience === 'expert' ? $this->sections($values, 'evidence', ['One', 'Two', 'Three', 'Four', 'Five'], ['Title', 'Body', 'SourceTitle', 'SourceUrl', 'SecondaryTitle', 'SecondaryUrl']) : [];
+        $values['evidenceUpdated'] = $audience === 'expert' ? ($values['evidenceUpdated'] ?? '') : '';
         return $values;
     }
 
@@ -69,6 +72,11 @@ final class GuideHelper implements ProtectedContextAwareInterface
         return $node->dimensionSpacePoint->coordinates['language'] ?? 'en';
     }
 
+    public function audience(Node $node): string
+    {
+        return $node->dimensionSpacePoint->coordinates['audience'] ?? 'adult';
+    }
+
     public function label(string $id, Node $node): string
     {
         $locale = new Locale($this->language($node) === 'zh' ? 'zh_TW' : 'en');
@@ -86,6 +94,6 @@ final class GuideHelper implements ProtectedContextAwareInterface
 
     public function allowsCallOfMethod($methodName): bool
     {
-        return in_array($methodName, ['content', 'language', 'label'], true);
+        return in_array($methodName, ['content', 'language', 'audience', 'label'], true);
     }
 }

@@ -1,0 +1,53 @@
+comments: 'Normalize audience editorial fields after creating the audience variants'
+migration:
+  -
+    filters:
+      -
+        type: 'DimensionSpacePoints'
+        settings:
+          points:
+            - { language: 'en', audience: 'children' }
+            - { language: 'zh', audience: 'children' }
+    transformations:
+      - { type: 'RenameProperty', settings: { from: 'childrenTitle', to: 'audienceTitle' } }
+      - { type: 'RenameProperty', settings: { from: 'childrenBody', to: 'audienceBody' } }
+      - { type: 'RenameProperty', settings: { from: 'childrenQuestion', to: 'audienceQuestion' } }
+      - { type: 'RenameProperty', settings: { from: 'childrenOptionA', to: 'audienceOptionA' } }
+      - { type: 'RenameProperty', settings: { from: 'childrenOptionB', to: 'audienceOptionB' } }
+      - { type: 'RenameProperty', settings: { from: 'childrenOptionC', to: 'audienceOptionC' } }
+      - { type: 'RenameProperty', settings: { from: 'childrenCorrect', to: 'audienceCorrect' } }
+      - { type: 'RenameProperty', settings: { from: 'childrenExplanation', to: 'audienceExplanation' } }
+  -
+    filters:
+      -
+        type: 'DimensionSpacePoints'
+        settings:
+          points:
+            - { language: 'en', audience: 'adult' }
+            - { language: 'zh', audience: 'adult' }
+    transformations:
+      - { type: 'RenameProperty', settings: { from: 'adultTitle', to: 'audienceTitle' } }
+      - { type: 'RenameProperty', settings: { from: 'adultBody', to: 'audienceBody' } }
+      - { type: 'RenameProperty', settings: { from: 'adultQuestion', to: 'audienceQuestion' } }
+      - { type: 'RenameProperty', settings: { from: 'adultOptionA', to: 'audienceOptionA' } }
+      - { type: 'RenameProperty', settings: { from: 'adultOptionB', to: 'audienceOptionB' } }
+      - { type: 'RenameProperty', settings: { from: 'adultOptionC', to: 'audienceOptionC' } }
+      - { type: 'RenameProperty', settings: { from: 'adultCorrect', to: 'audienceCorrect' } }
+      - { type: 'RenameProperty', settings: { from: 'adultExplanation', to: 'audienceExplanation' } }
+  -
+    filters:
+      -
+        type: 'DimensionSpacePoints'
+        settings:
+          points:
+            - { language: 'en', audience: 'expert' }
+            - { language: 'zh', audience: 'expert' }
+    transformations:
+      - { type: 'RenameProperty', settings: { from: 'expertTitle', to: 'audienceTitle' } }
+      - { type: 'RenameProperty', settings: { from: 'expertBody', to: 'audienceBody' } }
+      - { type: 'RenameProperty', settings: { from: 'expertQuestion', to: 'audienceQuestion' } }
+      - { type: 'RenameProperty', settings: { from: 'expertOptionA', to: 'audienceOptionA' } }
+      - { type: 'RenameProperty', settings: { from: 'expertOptionB', to: 'audienceOptionB' } }
+      - { type: 'RenameProperty', settings: { from: 'expertOptionC', to: 'audienceOptionC' } }
+      - { type: 'RenameProperty', settings: { from: 'expertCorrect', to: 'audienceCorrect' } }
+      - { type: 'RenameProperty', settings: { from: 'expertExplanation', to: 'audienceExplanation' } }

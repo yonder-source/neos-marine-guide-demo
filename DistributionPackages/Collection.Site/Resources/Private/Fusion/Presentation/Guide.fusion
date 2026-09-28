@@ -1,9 +1,13 @@
 prototype(Collection.Site:Presentation.Guide) < prototype(Neos.Fusion:Component) {
   data = ${MarineGuide.content(node)}
+  audienceItems = Neos.Neos:DimensionsMenuItems {
+    dimension = 'audience'
+    presets = ${['children', 'adult', 'expert']}
+  }
   id = ${'marine-' + node.aggregateId.value}
   imageUri = Collection.Site:Presentation.GuideImageUri
   renderer = afx`
-    <article class="guide" data-guide data-initial-audience="adult" id={props.id}
+    <article class="guide" data-guide data-audience={props.data.audience} data-language={MarineGuide.language(documentNode)} id={props.id}
       data-deck-previous={MarineGuide.label('deck.previous', documentNode)}
       data-deck-next={MarineGuide.label('deck.next', documentNode)}
       data-deck-home={MarineGuide.label('deck.home', documentNode)}
@@ -20,11 +24,14 @@ prototype(Collection.Site:Presentation.Guide) < prototype(Neos.Fusion:Component)
         <div><p class="eyebrow">FIELD NOTES / 01 <span>{String.htmlSpecialChars(props.data.category)}</span></p><h2>{String.htmlSpecialChars(props.data.guideTitle)}</h2></div>
         <p class="reading-time"><span aria-hidden="true">◷</span> <Collection.Site:Presentation.Label labelKey="duration.before" /> {String.htmlSpecialChars(props.data.duration)} <Collection.Site:Presentation.Label labelKey="duration.after" /></p>
       </header>
-      <div class="audience-switch" data-audience-switch hidden aria-label={MarineGuide.label('audience.label', documentNode)}>
-        <button type="button" data-audience="children" id={props.id + '-tab-children'} aria-controls={props.id + '-children'}><span class="audience-number">01</span><span><strong><Collection.Site:Presentation.Label labelKey="children.name" /></strong><small><Collection.Site:Presentation.Label labelKey="children.hint" /></small></span><span class="tab-arrow" aria-hidden="true">↗</span></button>
-        <button type="button" data-audience="adult" id={props.id + '-tab-adult'} aria-controls={props.id + '-adult'}><span class="audience-number">02</span><span><strong><Collection.Site:Presentation.Label labelKey="adult.name" /></strong><small><Collection.Site:Presentation.Label labelKey="adult.hint" /></small></span><span class="tab-arrow" aria-hidden="true">↗</span></button>
-        <button type="button" data-audience="expert" id={props.id + '-tab-expert'} aria-controls={props.id + '-expert'}><span class="audience-number">03</span><span><strong><Collection.Site:Presentation.Label labelKey="expert.name" /></strong><small><Collection.Site:Presentation.Label labelKey="expert.hint" /></small></span><span class="tab-arrow" aria-hidden="true">↗</span></button>
-      </div>
+      <nav class="audience-switch" data-audience-switch aria-label={MarineGuide.label('audience.label', documentNode)}>
+        <Neos.Fusion:Loop items={props.audienceItems} itemName="audienceItem">
+          <a @if.available={audienceItem.uri} href={audienceItem.uri} data-audience={audienceItem.targetDimensions.audience.value} aria-current={audienceItem.targetDimensions.audience.value == props.data.audience ? 'page' : null}>
+            <span class="audience-number">{audienceItem.targetDimensions.audience.value == 'children' ? '01' : audienceItem.targetDimensions.audience.value == 'adult' ? '02' : '03'}</span>
+            <span><strong><Collection.Site:Presentation.Label labelKey={audienceItem.targetDimensions.audience.value + '.name'} /></strong><small><Collection.Site:Presentation.Label labelKey={audienceItem.targetDimensions.audience.value + '.hint'} /></small></span><span class="tab-arrow" aria-hidden="true">↗</span>
+          </a>
+        </Neos.Fusion:Loop>
+      </nav>
       <div class="guide-layout">
         <div class="observation">
           <figure class="observation-figure">
@@ -44,19 +51,12 @@ prototype(Collection.Site:Presentation.Guide) < prototype(Neos.Fusion:Component)
           <dl class="specimen-facts"><div><dt><Collection.Site:Presentation.Label labelKey="facts.name" /></dt><dd>{String.htmlSpecialChars(props.data.commonName)}</dd></div><div><dt><Collection.Site:Presentation.Label labelKey="facts.scientific" /></dt><dd><i>{String.htmlSpecialChars(props.data.scientificName)}</i></dd></div><div><dt><Collection.Site:Presentation.Label labelKey="facts.habitat" /></dt><dd>{String.htmlSpecialChars(props.data.habitat)}</dd></div></dl>
         </div>
         <div class="audience-panels">
-          <section class="audience-panel" data-audience-panel="children" id={props.id + '-children'} aria-labelledby={props.id + '-heading-children'}>
-            <p class="panel-label"><Collection.Site:Presentation.Label labelKey="children.panel" /></p><h3 id={props.id + '-heading-children'}>{String.htmlSpecialChars(props.data.childrenTitle)}</h3><p class="guide-story">{String.htmlSpecialChars(props.data.childrenBody)}</p><img class="children-illustration" src={StaticResource.uri('Collection.Site', 'Public/Images/hawksbill-buddy.svg')} alt="" aria-hidden="true" loading="lazy" />
-            <Collection.Site:Presentation.Quiz id={props.id + '-quiz-children'} question={props.data.childrenQuestion} optionA={props.data.childrenOptionA} optionB={props.data.childrenOptionB} optionC={props.data.childrenOptionC} correct={props.data.childrenCorrect} explanation={props.data.childrenExplanation} audience="children" />
-          </section>
-          <section class="audience-panel" data-audience-panel="adult" id={props.id + '-adult'} aria-labelledby={props.id + '-heading-adult'}>
-            <p class="panel-label"><Collection.Site:Presentation.Label labelKey="adult.panel" /></p><h3 id={props.id + '-heading-adult'}>{String.htmlSpecialChars(props.data.adultTitle)}</h3><p class="guide-story">{String.htmlSpecialChars(props.data.adultBody)}</p>
+          <section class="audience-panel" data-audience-panel={props.data.audience} id={props.id + '-audience'} aria-labelledby={props.id + '-heading-audience'}>
+            <p class="panel-label"><Collection.Site:Presentation.Label labelKey={props.data.audience + '.panel'} /></p><h3 id={props.id + '-heading-audience'}>{String.htmlSpecialChars(props.data.audienceTitle)}</h3><p class="guide-story">{String.htmlSpecialChars(props.data.audienceBody)}</p>
+            <img class="children-illustration" src={StaticResource.uri('Collection.Site', 'Public/Images/hawksbill-buddy.svg')} alt="" aria-hidden="true" loading="lazy" @if.forChildren={props.data.audience == 'children'} />
             <Collection.Site:Presentation.Actions id={props.id} items={props.data.actions} />
-            <Collection.Site:Presentation.Quiz id={props.id + '-quiz-adult'} question={props.data.adultQuestion} optionA={props.data.adultOptionA} optionB={props.data.adultOptionB} optionC={props.data.adultOptionC} correct={props.data.adultCorrect} explanation={props.data.adultExplanation} />
-          </section>
-          <section class="audience-panel" data-audience-panel="expert" id={props.id + '-expert'} aria-labelledby={props.id + '-heading-expert'}>
-            <p class="panel-label"><Collection.Site:Presentation.Label labelKey="expert.panel" /></p><h3 id={props.id + '-heading-expert'}>{String.htmlSpecialChars(props.data.expertTitle)}</h3><p class="guide-story">{String.htmlSpecialChars(props.data.expertBody)}</p>
             <Collection.Site:Presentation.Evidence id={props.id} metrics={props.data.metrics} items={props.data.evidence} updated={props.data.evidenceUpdated} />
-            <Collection.Site:Presentation.Quiz id={props.id + '-quiz-expert'} question={props.data.expertQuestion} optionA={props.data.expertOptionA} optionB={props.data.expertOptionB} optionC={props.data.expertOptionC} correct={props.data.expertCorrect} explanation={props.data.expertExplanation} />
+            <Collection.Site:Presentation.Quiz id={props.id + '-quiz'} question={props.data.audienceQuestion} optionA={props.data.audienceOptionA} optionB={props.data.audienceOptionB} optionC={props.data.audienceOptionC} correct={props.data.audienceCorrect} explanation={props.data.audienceExplanation} audience={props.data.audience} />
           </section>
         </div>
       </div>

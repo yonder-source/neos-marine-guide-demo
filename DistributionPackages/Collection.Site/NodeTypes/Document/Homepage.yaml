@@ -18,6 +18,7 @@
   properties:
     heroTitle:
       type: string
+      scope: specializations
       defaultValue: 讓玳瑁的回家路，少一點傷害。
       ui:
         label: 首頁標題
@@ -26,6 +27,7 @@
           group: hero
     heroIntro:
       type: string
+      scope: specializations
       defaultValue: 從一隻海龜出發：孩子學會心疼，大人找到行動，研究者追問保育是否有效。
       ui:
         label: 首頁引言

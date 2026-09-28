@@ -1,6 +1,6 @@
 # Marine Guide Demo — Neos CMS
 
-A Neos CMS demo built with the `Collection.Site` package. The marine guide uses a hawksbill turtle to demonstrate a slide-based experience for large displays, conservation actions, research evidence, and interactive questions. The guide supports English and Traditional Chinese content.
+A Neos CMS demo built with the `Collection.Site` package. The marine guide uses a hawksbill turtle to demonstrate a slide-based experience for large displays, conservation actions, research evidence, and interactive questions. Content supports English and Traditional Chinese, with children, adult, and expert audiences.
 
 ## Getting started
 
@@ -15,7 +15,7 @@ The Dev Container uses `compose.yaml` to start the application and database. You
 
 For a fresh checkout of this version, temporarily set `"overrideCommand": true` in `.devcontainer/devcontainer.json` before reopening. This keeps the container running while you install dependencies and initialize the site.
 
-The Traditional Chinese route is `/zh`.
+The Traditional Chinese route is `/zh`. English adult content uses `/`; children and expert content use `/children` and `/experts`.
 
 ## Initial setup
 
@@ -48,7 +48,31 @@ Create a local administrator inside the Dev Container:
 ./flow user:create <username> <password> <first-name> <last-name> --roles Administrator
 ```
 
-A new site starts with demo defaults defined in the NodeTypes. To provide bilingual content, create the language variants in the Neos backend and edit their translations.
+A new site starts with demo defaults defined in the NodeTypes. Create a Traditional Chinese language variant in the Neos backend. Create children and expert variants for each language, then edit their content:
+
+```bash
+./flow content:createvariantsrecursively '{"language":"en","audience":"adult"}' '{"language":"en","audience":"children"}'
+./flow content:createvariantsrecursively '{"language":"en","audience":"adult"}' '{"language":"en","audience":"expert"}'
+```
+
+After creating the Chinese adult variant, repeat these commands with `zh` instead of `en`. Starting the containers does not automatically create all translated and audience-specific content.
+
+## Upgrading an existing site to audience dimensions
+
+This sequence is for an existing site with English and Chinese content created before the audience dimension was introduced. It is not part of fresh-site initialization. Back up the database and resources before upgrading, and run the commands in order inside the Dev Container:
+
+```bash
+./flow nodemigration:execute 20260928120001
+./flow content:createvariantsrecursively '{"language":"en","audience":"adult"}' '{"language":"en","audience":"children"}'
+./flow content:createvariantsrecursively '{"language":"en","audience":"adult"}' '{"language":"en","audience":"expert"}'
+./flow content:createvariantsrecursively '{"language":"zh","audience":"adult"}' '{"language":"zh","audience":"children"}'
+./flow content:createvariantsrecursively '{"language":"zh","audience":"adult"}' '{"language":"zh","audience":"expert"}'
+./flow nodemigration:execute 20260928120002
+./flow workspace:rebaseoutdated
+./flow flow:cache:flush
+```
+
+`Version20260928120001` moves existing language content to the adult dimension and adds shine-through for children and experts. The next commands create independent audience variants. `Version20260928120002` then renames the audience-specific editorial properties to shared property names. Migration definitions are in `DistributionPackages/Collection.Site/Migrations/ContentRepository/`.
 
 ## Development measurement
 

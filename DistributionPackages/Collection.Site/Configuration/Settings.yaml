@@ -14,6 +14,17 @@ Neos:
                 label: English
               zh:
                 label: 繁體中文
+          audience:
+            label: 受眾
+            icon: users
+            values:
+              adult:
+                label: 成人
+                specializations:
+                  children:
+                    label: 兒童
+                  expert:
+                    label: 專家
   Neos:
     sites:
       collection:
@@ -21,3 +32,18 @@ Neos:
         contentDimensions:
           defaultDimensionSpacePoint:
             language: en
+            audience: adult
+          resolver:
+            factoryClassName: Neos\Neos\FrontendRouting\DimensionResolution\Resolver\UriPathResolverFactory
+            options:
+              separator: '-'
+              segments:
+                - dimensionIdentifier: language
+                  dimensionValueMapping:
+                    en: ''
+                    zh: zh
+                - dimensionIdentifier: audience
+                  dimensionValueMapping:
+                    children: children
+                    adult: ''
+                    expert: experts

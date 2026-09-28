@@ -11,17 +11,9 @@
           label: 圖片與出處
           position: 110
           icon: fish
-        children:
-          label: 兒童導覽
+        audience:
+          label: 受眾內容
           position: 120
-          icon: fish
-        adult:
-          label: 成人導覽
-          position: 130
-          icon: fish
-        expert:
-          label: 專家導覽
-          position: 140
           icon: fish
         observation:
           label: 照片觀察
@@ -40,8 +32,12 @@
           position: 146
           icon: book
   properties:
+    title:
+      type: string
+      scope: specializations
     guideTitle:
       type: string
+      scope: specializations
       defaultValue: 玳瑁，值得被好好保護
       ui:
         label: 導覽標題
@@ -51,6 +47,7 @@
           position: 1
     commonName:
       type: string
+      scope: specializations
       defaultValue: 玳瑁
       ui:
         label: 生物名稱
@@ -60,6 +57,7 @@
           position: 2
     scientificName:
       type: string
+      scope: specializations
       defaultValue: 'Eretmochelys imbricata'
       ui:
         label: 學名或類群
@@ -69,6 +67,7 @@
           position: 3
     category:
       type: string
+      scope: specializations
       defaultValue: 海龜救傷與保育
       ui:
         label: 探索主題
@@ -78,6 +77,7 @@
           position: 4
     habitat:
       type: string
+      scope: specializations
       defaultValue: 熱帶與亞熱帶海域・珊瑚礁周邊
       ui:
         label: 棲地
@@ -87,6 +87,7 @@
           position: 5
     duration:
       type: integer
+      scope: specializations
       defaultValue: 8
       ui:
         label: 建議分鐘數
@@ -96,6 +97,7 @@
           position: 6
     imageAlt:
       type: string
+      scope: specializations
       defaultValue: 一隻玳瑁在藍色海水中游泳，可見彎曲的吻部、花紋背甲與伸展的鰭肢。
       ui:
         label: 圖片替代文字
@@ -105,6 +107,7 @@
           position: 7
     imageCaption:
       type: string
+      scope: specializations
       defaultValue: 玳瑁物種示意照片・非下列救傷個案；使用來源縮圖，未改繪
       ui:
         label: 圖片說明
@@ -114,6 +117,7 @@
           position: 8
     imageCredit:
       type: string
+      scope: specializations
       defaultValue: 'Caroline S. Rogers / U.S. Fish and Wildlife Service · CC BY 2.0'
       ui:
         label: 攝影與授權
@@ -123,6 +127,7 @@
           position: 9
     imageSourceUrl:
       type: string
+      scope: specializations
       defaultValue: 'https://commons.wikimedia.org/wiki/File:Hawksbill_Sea_Turtle_Carey_de_Concha_(5840602412).jpg'
       ui:
         label: 圖片出處網址
@@ -130,67 +135,30 @@
         inspector:
           group: image
           position: 10
-    childrenTitle:
+    audienceTitle:
       type: string
-      defaultValue: 如果牠會說話，會希望我們怎麼做？
-      ui:
-        label: 兒童版標題
-        reloadPageIfChanged: true
-        inspector:
-          group: children
-          position: 11
-    childrenBody:
-      type: string
-      defaultValue: |-
-        想像你正自在地游泳，卻被人類留下的漁線纏住，連伸展手腳都會痛。海龜遇到這種事，是不是讓你很心疼，覺得「這樣對牠太過分了」？
-        玳瑁不該因我們留下的垃圾而受傷。我們也能成為保護牠的人：把垃圾帶走、不追逐或摸海龜；看到受傷的海龜，先找大人一起求助。
-      ui:
-        label: 兒童版內容
-        reloadPageIfChanged: true
-        inspector:
-          group: children
-          position: 12
-          editor: Neos.Neos/Inspector/Editors/TextAreaEditor
-    adultTitle:
-      type: string
+      scope: node
       defaultValue: 把關心，變成做得到的保育行動。
       ui:
-        label: 成人版標題
+        label: 導覽標題
         reloadPageIfChanged: true
         inspector:
-          group: adult
-          position: 13
-    adultBody:
+          group: audience
+          position: 11
+    audienceBody:
       type: string
+      scope: node
       defaultValue: 你不需要先成為海洋專家。選擇一項能持續參與的行動：提供不干擾動物的目擊照片、參加正式保育活動，或學會正確通報。先選一件，再從官方入口開始。
       ui:
-        label: 成人版內容
+        label: 導覽內容
         reloadPageIfChanged: true
         inspector:
-          group: adult
-          position: 14
-          editor: Neos.Neos/Inspector/Editors/TextAreaEditor
-    expertTitle:
-      type: string
-      defaultValue: 從救回一隻，追問保育是否有效。
-      ui:
-        label: 專家版標題
-        reloadPageIfChanged: true
-        inspector:
-          group: expert
-          position: 15
-    expertBody:
-      type: string
-      defaultValue: 把「擱淺通報、個案照護、資源需求、野外研究、政策執行」放在不同層次閱讀。以下保留統計期間、物種範圍與原始來源，供查核與延伸研究。
-      ui:
-        label: 專家版內容
-        reloadPageIfChanged: true
-        inspector:
-          group: expert
-          position: 16
+          group: audience
+          position: 12
           editor: Neos.Neos/Inspector/Editors/TextAreaEditor
     observationOneTitle:
       type: string
+      scope: specializations
       defaultValue: 看看像鳥喙的吻部
       ui:
         label: 觀察點一
@@ -200,6 +168,7 @@
           position: 17
     observationOneBody:
       type: string
+      scope: specializations
       defaultValue: 玳瑁的吻部較尖、向下彎曲。從照片認識外形就好，不必追近、觸摸或餵食牠。
       ui:
         label: 觀察點一說明
@@ -210,6 +179,7 @@
           editor: Neos.Neos/Inspector/Editors/TextAreaEditor
     observationTwoTitle:
       type: string
+      scope: specializations
       defaultValue: 美麗的背甲，不該成為商品
       ui:
         label: 觀察點二
@@ -219,6 +189,7 @@
           position: 19
     observationTwoBody:
       type: string
+      scope: specializations
       defaultValue: 背甲的花紋令人印象深刻；玳瑁也曾因龜甲交易遭大量捕捉。欣賞活著的牠，拒買龜甲製品，是保護的一步。
       ui:
         label: 觀察點二說明
@@ -229,6 +200,7 @@
           editor: Neos.Neos/Inspector/Editors/TextAreaEditor
     sourceTitle:
       type: string
+      scope: specializations
       defaultValue: IUCN（2026）：玳瑁全球極危與保育威脅（英文）
       ui:
         label: 知識來源名稱
@@ -238,6 +210,7 @@
           position: 21
     sourceUrl:
       type: string
+      scope: specializations
       defaultValue: 'https://iucn.org/story/202603/guardians-reef-protecting-hawksbill-turtle-arnavon'
       ui:
         label: 知識來源網址
@@ -247,6 +220,7 @@
           position: 22
     followupQuestion:
       type: string
+      scope: specializations
       defaultValue: 救回一隻海龜，就代表保育成功了嗎？
       ui:
         label: 延伸提問
@@ -256,6 +230,7 @@
           position: 23
     followupAnswer:
       type: string
+      scope: specializations
       defaultValue: 救傷讓一個生命多一次機會；長期保育還需要減少纏繞、誤捕、交易與棲地破壞。專家視角整理了通報、照護、資源與研究，幫助我們分辨「做了什麼」與「帶來什麼改變」。
       ui:
         label: 延伸回答
@@ -264,115 +239,56 @@
           group: sources
           position: 24
           editor: Neos.Neos/Inspector/Editors/TextAreaEditor
-    childrenQuestion:
+    audienceQuestion:
       type: string
-      defaultValue: 你和家人在海邊看到受傷的海龜，怎麼做才是在幫牠？
-      ui:
-        label: 觀察題
-        reloadPageIfChanged: true
-        inspector:
-          group: children
-          position: 25
-    childrenOptionA:
-      type: string
-      defaultValue: '保持距離，請大人撥打 118 求助'
-      ui:
-        label: '選項 A'
-        reloadPageIfChanged: true
-        inspector:
-          group: children
-          position: 26
-    childrenOptionB:
-      type: string
-      defaultValue: 把牠抱回海裡，讓牠自己游走
-      ui:
-        label: '選項 B'
-        reloadPageIfChanged: true
-        inspector:
-          group: children
-          position: 27
-    childrenOptionC:
-      type: string
-      defaultValue: 摸摸牠，再給牠吃東西
-      ui:
-        label: '選項 C'
-        reloadPageIfChanged: true
-        inspector:
-          group: children
-          position: 28
-    childrenCorrect:
-      type: string
-      defaultValue: a
-      ui:
-        label: 正確選項
-        reloadPageIfChanged: true
-        inspector:
-          group: children
-          position: 29
-          editor: Neos.Neos/Inspector/Editors/SelectBoxEditor
-          editorOptions:
-            values:
-              a:
-                label: A
-              b:
-                label: B
-              c:
-                label: C
-    childrenExplanation:
-      type: string
-      defaultValue: 保護牠，先從不增加傷害開始。請大人告訴救援人員發現的地點與海龜狀況，等待專業團隊指導，不自行搬動、餵食或野放。
-      ui:
-        label: 答案解析
-        reloadPageIfChanged: true
-        inspector:
-          group: children
-          position: 30
-          editor: Neos.Neos/Inspector/Editors/TextAreaEditor
-    adultQuestion:
-      type: string
+      scope: node
       defaultValue: 想參與保育，又剛好在海中遇到玳瑁，哪個做法較合適？
       ui:
-        label: 觀察題
+        label: 互動問題
         reloadPageIfChanged: true
         inspector:
-          group: adult
-          position: 31
-    adultOptionA:
+          group: audience
+          position: 13
+    audienceOptionA:
       type: string
+      scope: node
       defaultValue: 追近一點，拉住牠拍清楚的照片
       ui:
-        label: '選項 A'
+        label: 選項 A
         reloadPageIfChanged: true
         inspector:
-          group: adult
-          position: 32
-    adultOptionB:
+          group: audience
+          position: 14
+    audienceOptionB:
       type: string
+      scope: node
       defaultValue: 不追逐、不觸碰，記錄目擊資訊再回報
       ui:
-        label: '選項 B'
+        label: 選項 B
         reloadPageIfChanged: true
         inspector:
-          group: adult
-          position: 33
-    adultOptionC:
+          group: audience
+          position: 15
+    audienceOptionC:
       type: string
+      scope: node
       defaultValue: 買一隻海龜來放生
       ui:
-        label: '選項 C'
+        label: 選項 C
         reloadPageIfChanged: true
         inspector:
-          group: adult
-          position: 34
-    adultCorrect:
+          group: audience
+          position: 16
+    audienceCorrect:
       type: string
+      scope: node
       defaultValue: b
       ui:
         label: 正確選項
         reloadPageIfChanged: true
         inspector:
-          group: adult
-          position: 35
+          group: audience
+          position: 17
           editor: Neos.Neos/Inspector/Editors/SelectBoxEditor
           editorOptions:
             values:
@@ -382,82 +298,20 @@
                 label: B
               c:
                 label: C
-    adultExplanation:
+    audienceExplanation:
       type: string
+      scope: node
       defaultValue: 有價值的紀錄不該以干擾動物為代價。安全且不干擾的照片、時間及地點能支持公民科學；動物救傷與野放需由專業團隊評估。
       ui:
         label: 答案解析
         reloadPageIfChanged: true
         inspector:
-          group: adult
-          position: 36
-          editor: Neos.Neos/Inspector/Editors/TextAreaEditor
-    expertQuestion:
-      type: string
-      defaultValue: '2025 年通報資料中有 27 隻玳瑁，可以推論什麼？'
-      ui:
-        label: 觀察題
-        reloadPageIfChanged: true
-        inspector:
-          group: expert
-          position: 37
-    expertOptionA:
-      type: string
-      defaultValue: '台灣野外只剩下 27 隻玳瑁'
-      ui:
-        label: '選項 A'
-        reloadPageIfChanged: true
-        inspector:
-          group: expert
-          position: 38
-    expertOptionB:
-      type: string
-      defaultValue: '27 隻都已治療成功並野放'
-      ui:
-        label: '選項 B'
-        reloadPageIfChanged: true
-        inspector:
-          group: expert
-          position: 39
-    expertOptionC:
-      type: string
-      defaultValue: '該年度擱淺統計包含 27 隻玳瑁，仍需另查族群與照護資料'
-      ui:
-        label: '選項 C'
-        reloadPageIfChanged: true
-        inspector:
-          group: expert
-          position: 40
-    expertCorrect:
-      type: string
-      defaultValue: c
-      ui:
-        label: 正確選項
-        reloadPageIfChanged: true
-        inspector:
-          group: expert
-          position: 41
-          editor: Neos.Neos/Inspector/Editors/SelectBoxEditor
-          editorOptions:
-            values:
-              a:
-                label: A
-              b:
-                label: B
-              c:
-                label: C
-    expertExplanation:
-      type: string
-      defaultValue: 通報／擱淺數、野外族群量、治療成功率使用不同的資料與分母。要評估救傷成效，還需串接收容、醫療、野放及後續追蹤，並考量漏報與抽樣偏差。
-      ui:
-        label: 答案解析
-        reloadPageIfChanged: true
-        inspector:
-          group: expert
-          position: 42
+          group: audience
+          position: 18
           editor: Neos.Neos/Inspector/Editors/TextAreaEditor
     image:
       type: Neos\Media\Domain\Model\ImageInterface
+      scope: specializations
       ui:
         label: 生物圖片（留空使用示範照片）
         reloadPageIfChanged: true
@@ -466,6 +320,7 @@
           position: 1
     observationOneX:
       type: integer
+      scope: specializations
       defaultValue: 12
       ui:
         label: 觀察點一水平位置（8–88%）
@@ -479,6 +334,7 @@
             step: 1
     observationOneY:
       type: integer
+      scope: specializations
       defaultValue: 38
       ui:
         label: 觀察點一垂直位置（8–88%）
@@ -492,6 +348,7 @@
             step: 1
     observationTwoX:
       type: integer
+      scope: specializations
       defaultValue: 58
       ui:
         label: 觀察點二水平位置（8–88%）
@@ -505,6 +362,7 @@
             step: 1
     observationTwoY:
       type: integer
+      scope: specializations
       defaultValue: 39
       ui:
         label: 觀察點二垂直位置（8–88%）
@@ -518,6 +376,7 @@
             step: 1
     imageLicenseUrl:
       type: string
+      scope: specializations
       ui:
         label: 圖片授權網址
         reloadPageIfChanged: true
@@ -654,6 +513,7 @@
       defaultValue: 'https://doi.org/10.1186/s12862-025-02354-2'
     conservationStatus:
       type: string
+      scope: specializations
       ui:
         label: 保育狀態與範圍
         reloadPageIfChanged: true
@@ -970,6 +830,7 @@
       defaultValue: 'Fong et al.（2025），BMC Ecology and Evolution（DOI）'
     speciesSourceTitle:
       type: string
+      scope: specializations
       defaultValue: NOAA：玳瑁外形、生態與威脅（英文）
       ui:
         label: 物種來源名稱
@@ -978,6 +839,7 @@
           group: sources
     speciesSourceUrl:
       type: string
+      scope: specializations
       defaultValue: 'https://www.fisheries.noaa.gov/species/hawksbill-turtle'
       ui:
         label: 物種來源網址

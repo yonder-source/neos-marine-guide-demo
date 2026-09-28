@@ -2,15 +2,63 @@
   'use strict';
 
   const initialized = new WeakSet();
-  const audienceNames = ['children', 'adult', 'expert'];
+  function pageKey(guide) {
+    return `guide:${guide.id}:${guide.dataset.language}:${guide.dataset.audience}`;
+  }
 
-  // Keep real server-rendered language links usable without JavaScript.
-  // Only carry the public audience selection; never copy Neos backend arguments.
-  function updateLanguageLinks(audience) {
-    document.querySelectorAll('[data-language-link]').forEach((link) => {
-      const url = new URL(link.href, window.location.href);
-      url.searchParams.set('audience', audience);
-      link.href = url.href;
+  function interactionKey(guide) {
+    return `${pageKey(guide)}:interactions`;
+  }
+
+  function clearGuideState(guide) {
+    const keyPrefix = `guide:${guide.id}:${guide.dataset.language}:`;
+    for (let index = sessionStorage.length - 1; index >= 0; index--) {
+      const key = sessionStorage.key(index);
+      if (key?.startsWith(keyPrefix)) sessionStorage.removeItem(key);
+    }
+  }
+
+  function saveInteractions(guide) {
+    const state = {
+      quizzes: Object.fromEntries([...guide.querySelectorAll('[data-quiz]')].map((quiz) => [
+        quiz.id,
+        {
+          answer: quiz.querySelector('[data-answer][aria-pressed="true"]')?.dataset.answer || null,
+          explanationOpen: Boolean(quiz.querySelector('.quiz-explanation')?.open),
+        },
+      ])),
+      actions: [...guide.querySelectorAll('[data-action-plan]')].map((plan) =>
+        [...plan.querySelectorAll('[data-action-check]')].map((choice) => choice.checked)),
+      openDetails: [...guide.querySelectorAll('details[open]')].map((details) => details.id).filter(Boolean),
+    };
+    sessionStorage.setItem(interactionKey(guide), JSON.stringify(state));
+  }
+
+  function restoreInteractions(guide) {
+    let state;
+    try {
+      state = JSON.parse(sessionStorage.getItem(interactionKey(guide)) || '{}');
+    } catch {
+      return;
+    }
+    Object.entries(state.quizzes || {}).forEach(([id, quizState]) => {
+      const quiz = document.getElementById(id);
+      const answer = quizState?.answer && quiz?.querySelector(`[data-answer="${quizState.answer}"]`);
+      if (answer) answer.click();
+      const explanation = quiz?.querySelector('.quiz-explanation');
+      if (explanation) explanation.open = Boolean(quizState?.explanationOpen);
+    });
+    (state.actions || []).forEach((choices, planIndex) => {
+      const plan = guide.querySelectorAll('[data-action-plan]')[planIndex];
+      if (!plan) return;
+      plan.querySelectorAll('[data-action-check]').forEach((choice, index) => {
+        choice.checked = Boolean(choices[index]);
+        choice.dispatchEvent(new Event('change', {bubbles: true}));
+      });
+    });
+    (state.openDetails || []).forEach((id) => {
+      const details = document.getElementById(id);
+      if (details) details.open = true;
     });
   }
 
@@ -18,51 +66,11 @@
     if (initialized.has(guide)) return;
     initialized.add(guide);
     const switcher = guide.querySelector('[data-audience-switch]');
-    const tabs = Array.from(guide.querySelectorAll('[data-audience]'));
     const panels = Array.from(guide.querySelectorAll('[data-audience-panel]'));
-    if (!switcher || tabs.length !== 3 || panels.length !== 3) return;
-
-    const selectAudience = (audience, focus = false) => {
-      if (!audienceNames.includes(audience)) return;
-      const previousAudience = guide.dataset.activeAudience;
-      tabs.forEach((tab) => {
-        const active = tab.dataset.audience === audience;
-        tab.setAttribute('aria-selected', String(active));
-        tab.tabIndex = active ? 0 : -1;
-        if (active && focus) tab.focus();
-      });
-      panels.forEach((panel) => { panel.hidden = panel.dataset.audiencePanel !== audience; });
-      guide.dataset.activeAudience = audience;
-      updateLanguageLinks(audience);
-      guide.dispatchEvent(new CustomEvent('audiencechange', {detail: {previousAudience}}));
-    };
-
-    switcher.setAttribute('role', 'tablist');
-    tabs.forEach((tab, index) => {
-      tab.setAttribute('role', 'tab');
-      tab.addEventListener('click', () => selectAudience(tab.dataset.audience));
-      tab.addEventListener('keydown', (event) => {
-        let target;
-        if (event.key === 'ArrowRight') target = (index + 1) % tabs.length;
-        if (event.key === 'ArrowLeft') target = (index - 1 + tabs.length) % tabs.length;
-        if (event.key === 'Home') target = 0;
-        if (event.key === 'End') target = tabs.length - 1;
-        if (target === undefined) return;
-        event.preventDefault();
-        selectAudience(tabs[target].dataset.audience, true);
-      });
-    });
-    panels.forEach((panel) => {
-      const tab = tabs.find((item) => item.dataset.audience === panel.dataset.audiencePanel);
-      panel.setAttribute('role', 'tabpanel');
-      panel.setAttribute('aria-labelledby', tab.id);
-      panel.tabIndex = 0;
-    });
-    const requested = new URL(window.location.href).searchParams.get('audience');
-    const initial = audienceNames.includes(requested) ? requested : guide.dataset.initialAudience;
-    selectAudience(audienceNames.includes(initial) ? initial : 'adult');
+    if (!switcher || panels.length !== 1) return;
+    guide.dataset.activeAudience = guide.dataset.audience;
+    panels[0].setAttribute('role', 'region');
     guide.dataset.enhanced = 'true';
-    switcher.hidden = false;
 
     guide.querySelectorAll('[data-quiz]').forEach((quiz) => {
       const options = quiz.querySelector('[data-quiz-options]');
@@ -83,6 +91,7 @@
             : quiz.dataset.feedbackIncorrect;
           quiz.dataset.completed = String(correct);
           reset.hidden = false;
+          saveInteractions(guide);
         });
       });
       reset.addEventListener('click', () => {
@@ -92,7 +101,9 @@
         explanation.open = false;
         reset.hidden = true;
         buttons[0]?.focus();
+        saveInteractions(guide);
       });
+      explanation.addEventListener('toggle', () => saveInteractions(guide));
     });
 
     guide.querySelectorAll('[data-action-plan]').forEach((plan) => {
@@ -107,7 +118,10 @@
         choices.forEach((choice) => choice.closest('.action-card')?.classList.toggle('is-selected', choice.checked));
       };
       plan.querySelectorAll('[data-action-choice]').forEach((choice) => { choice.hidden = false; });
-      choices.forEach((choice) => choice.addEventListener('change', update));
+      choices.forEach((choice) => choice.addEventListener('change', () => {
+        update();
+        saveInteractions(guide);
+      }));
       status.hidden = false;
       update();
     });
@@ -121,7 +135,12 @@
         button.setAttribute('aria-expanded', String(note.open));
       });
       note.addEventListener('toggle', () => button.setAttribute('aria-expanded', String(note.open)));
+      note.addEventListener('toggle', () => saveInteractions(guide));
     });
+    guide.querySelectorAll('.evidence-section, .followup details').forEach((details) => {
+      details.addEventListener('toggle', () => saveInteractions(guide));
+    });
+    restoreInteractions(guide);
   }
 
   function initializeDeck(guide) {
@@ -207,6 +226,7 @@
       status.textContent = `${index+1} / ${sequence.length} · ${sequence[index].label}`;
       previous.disabled = index === 0; next.disabled = index === sequence.length-1;
       guide.dataset.deckPage = String(index);
+      sessionStorage.setItem(pageKey(guide), String(index));
       const currentPage = sequence[index];
       if (index > 0 && currentPage?.audience === guide.dataset.activeAudience) {
         rememberedPage.set(guide.dataset.activeAudience, currentPage.element);
@@ -236,6 +256,7 @@
       });
       guide.querySelectorAll('[data-observation], .evidence-section, .followup details').forEach(detail => {detail.open = false;});
       guide.querySelectorAll('[data-hotspot]').forEach(hotspot => hotspot.setAttribute('aria-expanded', 'false'));
+      clearGuideState(guide);
       show(0);
     }
     guide.addEventListener('audiencechange', (event) => {
@@ -256,7 +277,8 @@
       const target = event.key === 'ArrowRight' || event.key === 'PageDown' ? index+1 : event.key === 'ArrowLeft' || event.key === 'PageUp' ? index-1 : null;
       if (target !== null) {event.preventDefault();show(target);}
     });
-    show(0, false);
+    const savedPage = Number(sessionStorage.getItem(pageKey(guide)));
+    show(Number.isInteger(savedPage) ? savedPage : 0, false);
   }
   function scan(root) {
     if (root instanceof Element && root.matches('[data-guide]')) initializeGuide(root);

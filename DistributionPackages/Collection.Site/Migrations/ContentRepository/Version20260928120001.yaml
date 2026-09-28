@@ -1,0 +1,36 @@
+comments: 'Move existing language content to adult and add audience fallbacks'
+migration:
+  -
+    transformations:
+      -
+        type: 'MoveDimensionSpacePoint'
+        settings:
+          from: { language: 'en' }
+          to: { language: 'en', audience: 'adult' }
+      -
+        type: 'MoveDimensionSpacePoint'
+        settings:
+          from: { language: 'zh' }
+          to: { language: 'zh', audience: 'adult' }
+  -
+    transformations:
+      -
+        type: 'AddDimensionShineThrough'
+        settings:
+          from: { language: 'en', audience: 'adult' }
+          to: { language: 'en', audience: 'children' }
+      -
+        type: 'AddDimensionShineThrough'
+        settings:
+          from: { language: 'en', audience: 'adult' }
+          to: { language: 'en', audience: 'expert' }
+      -
+        type: 'AddDimensionShineThrough'
+        settings:
+          from: { language: 'zh', audience: 'adult' }
+          to: { language: 'zh', audience: 'children' }
+      -
+        type: 'AddDimensionShineThrough'
+        settings:
+          from: { language: 'zh', audience: 'adult' }
+          to: { language: 'zh', audience: 'expert' }
