@@ -1,19 +1,25 @@
-prototype(Collection.Site:Document.Homepage) < prototype(Neos.Neos:Page) {
-  htmlTag.attributes.lang = 'zh-Hant'
-
-  head {
-    titleTag = Neos.Fusion:Tag {
-      tagName = 'title'
-      content = ${q(node).property('title')}
-    }
-    viewport = afx`<meta name="viewport" content="width=device-width, initial-scale=1" />`
-    stylesheets.site = afx`<link rel="stylesheet" href={StaticResource.uri('Collection.Site', 'Public/site.css')} />`
+prototype(Collection.Site:Document.Homepage) < prototype(Collection.Site:Presentation.Page) {
+  @cache.entryTags.guideDocuments = ${Neos.Caching.nodeTypeTag('Collection.Site:Document.Guide', node)}
+  @cache.entryTags.descendants = ${Neos.Caching.descendantOfTag(node)}
+  body = Neos.Fusion:Component {
+    data = ${MarineGuide.content(node)}
+    imageUri = Collection.Site:Presentation.GuideImageUri
+    heroTitle = ${q(node).property('heroTitle') != null ? q(node).property('heroTitle') : '讓玳瑁的回家路，少一點傷害。'}
+    heroIntro = ${q(node).property('heroIntro') != null ? q(node).property('heroIntro') : '從一隻海龜出發：孩子學會心疼，大人找到行動，研究者追問保育是否有效。'}
+    guides = ${q(node).children('[instanceof Collection.Site:Document.Guide]').get()}
+    renderer = afx`
+      <Collection.Site:Presentation.Header />
+      <main id="main" tabindex="-1">
+        <section class="hero" aria-labelledby="hero-title">
+          <div class="hero-copy"><p class="eyebrow">ONE TURTLE. THREE WAYS TO CARE.</p><h1 id="hero-title">{String.htmlSpecialChars(props.heroTitle)}</h1><p class="hero-intro">{String.htmlSpecialChars(props.heroIntro)}</p><a class="primary-button" href="#guide"><Collection.Site:Presentation.Label labelKey="hero.start" /> <span aria-hidden="true">↘</span></a><div class="hero-meta"><span><Collection.Site:Presentation.Label labelKey="hero.location" /></span><span><Collection.Site:Presentation.Label labelKey="hero.perspectives" /></span></div></div>
+          <div class="hero-visual"><img src={props.imageUri} alt={props.data.imageAlt} width="1280" height="890" fetchpriority="high" /><div class="hero-photo-note"><span>FEATURED ENCOUNTER</span><strong>{String.htmlSpecialChars(props.data.guideTitle)}</strong></div><span class="hero-coordinate" aria-hidden="true">LOOK CLOSER / DIVE DEEPER</span></div>
+        </section>
+        <div class="explore-intro"><span class="section-index">01 — EXPLORE</span><p><Collection.Site:Presentation.Label labelKey="explore.intro" /><strong><Collection.Site:Presentation.Label labelKey="explore.emphasis" /></strong></p><a href="#guide"><Collection.Site:Presentation.Label labelKey="explore.down" /> <span aria-hidden="true">↓</span></a></div>
+        <div class="page-container" id="guide"><Collection.Site:Presentation.Guide /></div>
+        <section class="more-guides page-container" @if.hasGuides={Array.length(props.guides) > 0} aria-labelledby="more-heading"><p class="eyebrow">NEXT ENCOUNTER</p><h2 id="more-heading"><Collection.Site:Presentation.Label labelKey="guides.next" /></h2><div class="guide-links"><Neos.Fusion:Loop items={props.guides} itemName="guideNode"><Neos.Neos:NodeLink node={guideNode} attributes.class="guide-link"><span>{String.htmlSpecialChars(q(guideNode).property('title'))}</span><span aria-hidden="true">↗</span></Neos.Neos:NodeLink></Neos.Fusion:Loop></div></section>
+        <div id="sources" class="visit-strip"><div><span class="eyebrow">BEYOND THE SCREEN</span><h2><Collection.Site:Presentation.Label labelKey="visit.title" /></h2><p><Collection.Site:Presentation.Label labelKey="visit.intro" /></p></div><a class="outline-button" href="https://www.nmmba.gov.tw/"><Collection.Site:Presentation.Label labelKey="visit.link" /> ↗</a></div>
+      </main>
+      <Collection.Site:Presentation.Footer />
+    `
   }
-
-  body = afx`
-    <main>
-      <h1><Neos.Neos:Editable property="title" /></h1>
-      <p>典藏與分眾導覽網站建置中。</p>
-    </main>
-  `
 }

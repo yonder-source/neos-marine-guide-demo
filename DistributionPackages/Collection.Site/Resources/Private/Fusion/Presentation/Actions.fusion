@@ -1,0 +1,20 @@
+prototype(Collection.Site:Presentation.Actions) < prototype(Neos.Fusion:Component) {
+  id = ''
+  items = ${[]}
+  renderer = afx`
+    <section class="conservation-actions" data-action-plan data-selected-message={MarineGuide.label('actions.selected', documentNode)} data-empty-message={MarineGuide.label('actions.empty', documentNode)} aria-labelledby={props.id + '-actions-heading'} @if.hasItems={Array.length(props.items) > 0}>
+      <h4 id={props.id + '-actions-heading'}><Collection.Site:Presentation.Label labelKey="actions.title" /></h4>
+      <div class="action-cards">
+        <Neos.Fusion:Loop items={props.items} itemName="action">
+          <article class="action-card">
+            <h5 id={props.id + '-action-' + action.key}>{String.htmlSpecialChars(action.title)}</h5>
+            <p>{String.htmlSpecialChars(action.body)}</p>
+            <a class="action-link" href={action.url} @if.hasUrl={action.url}>{String.htmlSpecialChars(action.link)} ↗</a>
+            <label class="action-choice" data-action-choice hidden><input type="checkbox" data-action-check aria-labelledby={props.id + '-action-' + action.key} /><span><Collection.Site:Presentation.Label labelKey="actions.choose" /></span></label>
+          </article>
+        </Neos.Fusion:Loop>
+      </div>
+      <p class="action-status" data-action-status role="status" aria-live="polite" aria-atomic="true" hidden></p>
+    </section>
+  `
+}

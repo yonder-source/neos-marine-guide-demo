@@ -1,0 +1,24 @@
+prototype(Collection.Site:Presentation.Quiz) < prototype(Neos.Fusion:Component) {
+  id = ''
+  audience = ''
+  question = ''
+  optionA = ''
+  optionB = ''
+  optionC = ''
+  correct = ''
+  explanation = ''
+  renderer = afx`
+    <section class={props.audience == 'children' ? 'quiz quiz--children' : 'quiz'} data-quiz data-correct={props.correct} data-feedback-correct={MarineGuide.label('quiz.correct', documentNode)} data-feedback-incorrect={MarineGuide.label('quiz.incorrect', documentNode)} aria-labelledby={props.id + '-question'} @if.hasQuestion={props.question}>
+      <p class="eyebrow">YOUR TURN <span><Collection.Site:Presentation.Label labelKey="quiz.turn" /></span></p>
+      <h4 id={props.id + '-question'}>{String.htmlSpecialChars(props.question)}</h4><img class="children-quiz-illustration" src={StaticResource.uri('Collection.Site', 'Public/Images/hawksbill-injured.svg')} alt="" aria-hidden="true" loading="lazy" @if.forChildren={props.audience == 'children'} />
+      <div class="quiz-options" data-quiz-options hidden>
+        <button type="button" data-answer="a" aria-pressed="false"><span>A</span>{String.htmlSpecialChars(props.optionA)}</button>
+        <button type="button" data-answer="b" aria-pressed="false"><span>B</span>{String.htmlSpecialChars(props.optionB)}</button>
+        <button type="button" data-answer="c" aria-pressed="false"><span>C</span>{String.htmlSpecialChars(props.optionC)}</button>
+      </div>
+      <p class="quiz-feedback" role="status" aria-live="polite" aria-atomic="true" data-quiz-feedback></p>
+      <details class="quiz-explanation"><summary><Collection.Site:Presentation.Label labelKey="quiz.explanation" /></summary><p>{String.htmlSpecialChars(props.explanation)}</p></details>
+      <button class="text-button" type="button" data-quiz-reset hidden><Collection.Site:Presentation.Label labelKey="quiz.reset" /> ↺</button>
+    </section>
+  `
+}

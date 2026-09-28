@@ -1,0 +1,13 @@
+prototype(Collection.Site:Presentation.GuideImageUri) < prototype(Neos.Fusion:Case) {
+    uploaded {
+      condition = ${q(node).property('image')}
+      renderer = Neos.Neos:ImageUri {
+        asset = ${q(node).property('image')}
+        maximumWidth = 1440
+      }
+    }
+    fallback {
+      condition = true
+      renderer = ${StaticResource.uri('Collection.Site', 'Public/Images/hawksbill.jpg')}
+    }
+  }

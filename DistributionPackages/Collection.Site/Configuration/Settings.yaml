@@ -1,0 +1,23 @@
+Neos:
+  Fusion:
+    defaultContext:
+      MarineGuide: Collection\Site\Eel\GuideHelper
+  ContentRepositoryRegistry:
+    contentRepositories:
+      default:
+        contentDimensions:
+          language:
+            label: 'Language / 語言'
+            icon: language
+            values:
+              en:
+                label: English
+              zh:
+                label: 繁體中文
+  Neos:
+    sites:
+      collection:
+        preset: default
+        contentDimensions:
+          defaultDimensionSpacePoint:
+            language: en
