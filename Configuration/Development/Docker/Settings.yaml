@@ -1,0 +1,10 @@
+Neos:
+  Flow:
+    persistence:
+      backendOptions:
+        driver: pdo_mysql
+        host: db
+        dbname: neos
+        user: neos
+        password: neos
+        charset: utf8mb4

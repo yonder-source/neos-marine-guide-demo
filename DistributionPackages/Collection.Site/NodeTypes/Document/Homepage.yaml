@@ -1,0 +1,6 @@
+'Collection.Site:Document.Homepage':
+  superTypes:
+    'Neos.Neos:Site': true
+  ui:
+    label: '典藏與導覽首頁'
+    icon: globe

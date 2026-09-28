@@ -1,0 +1,29 @@
+{
+  "name": "Collection Neos",
+  "dockerComposeFile": "../compose.yaml",
+  "service": "neos",
+  "workspaceFolder": "/app",
+  "shutdownAction": "stopCompose",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "bierner.markdown-mermaid",
+        "bmewburn.vscode-intelephense-client",
+        "dbaeumer.vscode-eslint",
+        "EditorConfig.EditorConfig",
+        "esbenp.prettier-vscode",
+        "GitHub.copilot",
+        "jock.svg",
+        "mermaidchart.vscode-mermaid-chart",
+        "mhutchie.git-graph",
+        "ms-php.php",
+        "neilbrayfield.php-docblocker",
+        "openai.chatgpt",
+        "orhymed.mermaid-visual-diff",
+        "redhat.vscode-yaml",
+        "ritwickdey.LiveServer",
+        "yzane.markdown-pdf"
+      ]
+    }
+  }
+}

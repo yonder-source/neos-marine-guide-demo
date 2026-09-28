@@ -1,0 +1,19 @@
+prototype(Collection.Site:Document.Homepage) < prototype(Neos.Neos:Page) {
+  htmlTag.attributes.lang = 'zh-Hant'
+
+  head {
+    titleTag = Neos.Fusion:Tag {
+      tagName = 'title'
+      content = ${q(node).property('title')}
+    }
+    viewport = afx`<meta name="viewport" content="width=device-width, initial-scale=1" />`
+    stylesheets.site = afx`<link rel="stylesheet" href={StaticResource.uri('Collection.Site', 'Public/site.css')} />`
+  }
+
+  body = afx`
+    <main>
+      <h1><Neos.Neos:Editable property="title" /></h1>
+      <p>典藏與分眾導覽網站建置中。</p>
+    </main>
+  `
+}

@@ -1,0 +1,18 @@
+body {
+  margin: 0;
+  color: #202420;
+  background: #fafaf7;
+  font-family: system-ui, sans-serif;
+  line-height: 1.6;
+}
+
+main {
+  max-width: 64rem;
+  margin-inline: auto;
+  padding: 2rem 1rem;
+}
+
+:focus-visible {
+  outline: 3px solid #075aa0;
+  outline-offset: 3px;
+}

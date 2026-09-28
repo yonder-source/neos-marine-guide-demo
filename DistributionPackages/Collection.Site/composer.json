@@ -1,0 +1,14 @@
+{
+    "name": "collection/site",
+    "description": "Collection and audience guide Neos practice site",
+    "type": "neos-site",
+    "license": "GPL-3.0-or-later",
+    "require": {
+        "neos/neos": "~9.1.0"
+    },
+    "extra": {
+        "neos": {
+            "package-key": "Collection.Site"
+        }
+    }
+}

@@ -1,0 +1,39 @@
+services:
+  neos:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    command: ./flow server:run --host 0.0.0.0 --port 8081
+    environment:
+      COMPOSER_HOME: /tmp/composer
+      FLOW_CONTEXT: Development/Docker
+      FLOW_PATH_TEMPORARY_BASE: /tmp/Flow
+    volumes:
+      - .:/app
+      - codex-data:/root/.codex
+      - vscode-server:/root/.vscode-server
+    ports:
+      - "8081:8081"
+    depends_on:
+      db:
+        condition: service_healthy
+
+  db:
+    image: mariadb:10.11
+    environment:
+      MARIADB_DATABASE: neos
+      MARIADB_USER: neos
+      MARIADB_PASSWORD: neos
+      MARIADB_ROOT_PASSWORD: root
+    healthcheck:
+      test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+    volumes:
+      - neos-db:/var/lib/mysql
+
+volumes:
+  codex-data:
+  neos-db:
+  vscode-server:
