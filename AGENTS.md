@@ -34,6 +34,7 @@ Database schema migrations and node migrations are separate operations. Follow t
 - PHPUnit is a Composer development dependency, available as `./bin/phpunit` after installation. The site package currently has no PHPUnit test suite or project-specific PHPUnit configuration.
 - Behat is not installed or configured for this project.
 - Report the checks actually run and any checks that could not be completed. Do not claim tests passed without running them.
+- Browser smoke checks are in `DistributionPackages/Collection.Site/Tests/Browser/deck-smoke.js`. Run the script in the homepage browser console or through CDP, against the guide version being tested. This is a browser script, not a standalone Node.js test runner.
 
 ## Git workflow
 
