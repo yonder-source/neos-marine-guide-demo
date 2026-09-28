@@ -48,6 +48,20 @@
     quiz.querySelector('[data-quiz-reset]').click();
     assert(!quiz.dataset.completed && document.activeElement.matches('[data-answer]'), `${audience}: reset and focus`);
   }
+  home.click();
+  next.click();next.click();
+  guide.querySelector('[data-audience="children"]').click();
+  assert(current().classList.contains('hero'), 'An audience with no saved progress starts at the cover');
+  next.click();next.click();
+  const childPage = current();
+  guide.querySelector('[data-audience="adult"]').click();
+  assert(current().classList.contains('hero'), 'Switching to an unvisited audience returns to the cover');
+  next.click();next.click();next.click();
+  const adultPage = current();
+  guide.querySelector('[data-audience="children"]').click();
+  assert(current() === childPage, 'Returning to children restores its own page');
+  guide.querySelector('[data-audience="adult"]').click();
+  assert(current() === adultPage, 'Returning to adults restores its own page');
   guide.querySelector('[data-audience="adult"]').click();
   const plan = goTo(page => page.matches('[data-action-plan]'));
   const choices = [...plan.querySelectorAll('[data-action-check]')];

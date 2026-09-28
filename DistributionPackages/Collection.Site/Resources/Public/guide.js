@@ -247,8 +247,7 @@
       const targetSequence = audiencePages();
       const remembered = rememberedPage.get(guide.dataset.activeAudience);
       const rememberedIndex = remembered ? targetSequence.findIndex(page => page.element === remembered) : -1;
-      const storyIndex = targetSequence.findIndex(page => page.audience === guide.dataset.activeAudience);
-      show(index === 0 ? 0 : rememberedIndex >= 0 ? rememberedIndex : Math.max(1, storyIndex), false);
+      show(index === 0 ? 0 : rememberedIndex >= 0 ? rememberedIndex : 0, false);
     });
     main.querySelectorAll('a[href="#guide"]').forEach(link => link.addEventListener('click', event => {event.preventDefault();show(1);}));
     document.querySelectorAll('a[href="#sources"]').forEach(link => link.addEventListener('click', event => {event.preventDefault();show(sequence.length-1);}));
