@@ -78,4 +78,4 @@ This sequence is for an existing site with English and Chinese content created b
 
 Plumber is installed as a Composer development dependency. Generate page requests, then browse http://localhost:8081/plumber.
 
-Footprint Sentinel modules are available in the site package’s `Resources/Public/footprint-sentinel/` directory but are not yet loaded on the homepage.
+Footprint Sentinel is loaded on the homepage for local measurement. It reports resource transfer bytes and highlights large resources, excluding its own modules from the measurements. To remove it after measurement, remove the `footprintSentinel` script include from `Page.fusion`.

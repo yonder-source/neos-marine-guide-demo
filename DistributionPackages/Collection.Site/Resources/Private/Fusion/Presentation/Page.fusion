@@ -10,6 +10,7 @@ prototype(Collection.Site:Presentation.Page) < prototype(Neos.Neos:Page) {
     description = afx`<meta name="description" content={MarineGuide.label('description', documentNode)} />`
     stylesheets.site = afx`<link rel="stylesheet" href={StaticResource.uri('Collection.Site', 'Public/site.css')} />`
     javascripts.guide = afx`<script src={StaticResource.uri('Collection.Site', 'Public/guide.js')} defer></script>`
+    javascripts.footprintSentinel = afx`<script type="module" src={StaticResource.uri('Collection.Site', 'Public/footprint-sentinel-loader.js')}></script>`
   }
 }
 
