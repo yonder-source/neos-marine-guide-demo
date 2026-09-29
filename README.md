@@ -78,4 +78,4 @@ This sequence is for an existing site with English and Chinese content created b
 
 Plumber is installed as a Composer development dependency. Generate page requests, then browse http://localhost:8081/plumber.
 
-Footprint Sentinel is loaded on the homepage for local measurement. It reports resource transfer bytes and highlights large resources, excluding its own modules from the measurements. To remove it after measurement, remove the `footprintSentinel` script include from `Page.fusion`.
+Footprint Sentinel is loaded on the homepage for local measurement. It reports resource transfer bytes and highlights large resources, excluding its own modules from the measurements. Use `?sentinel=off` to hide it for the current tab, including subsequent navigation; use `?sentinel=on` to show it again. To remove it after measurement, remove the `footprintSentinel` script include from `Page.fusion`.
