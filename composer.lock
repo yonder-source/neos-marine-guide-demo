@@ -117,11 +117,11 @@
         },
         {
             "name": "collection/site",
-            "version": "dev-main",
+            "version": "dev-feat/marine-guide-templates",
             "dist": {
                 "type": "path",
                 "url": "./DistributionPackages/Collection.Site",
-                "reference": "13de2ab85e3efb978c8c4995eb83030d00985230"
+                "reference": "f8e25bfed389540a219b512a7744d18be6fade24"
             },
             "require": {
                 "neos/neos": "~9.1.0"
@@ -130,6 +130,11 @@
             "extra": {
                 "neos": {
                     "package-key": "Collection.Site"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Collection\\Site\\": "Classes/"
                 }
             },
             "license": [

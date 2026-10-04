@@ -1,0 +1,64 @@
+prototype(Collection.Site:Presentation.Page) < prototype(Neos.Neos:Page) {
+  htmlTag.attributes.lang = ${MarineGuide.language(node) == 'zh' ? 'zh-Hant' : 'en'}
+  head {
+    titleTag >
+    titleTag = Neos.Fusion:Tag {
+      tagName = 'title'
+      content = ${String.htmlSpecialChars(q(node).property('title') + ' | ' + MarineGuide.label('brand', node))}
+    }
+    viewport = afx`<meta name="viewport" content="width=device-width, initial-scale=1" />`
+    description = afx`<meta name="description" content={MarineGuide.label('description', documentNode)} />`
+    stylesheets.site = afx`<link rel="stylesheet" href={StaticResource.uri('Collection.Site', 'Public/site.css')} />`
+    javascripts.guide = afx`<script src={StaticResource.uri('Collection.Site', 'Public/guide.js')} defer></script>`
+    javascripts.footprintSentinel = afx`<script type="module" src={StaticResource.uri('Collection.Site', 'Public/footprint-sentinel-loader.js')}></script>`
+  }
+}
+
+prototype(Collection.Site:Presentation.Header) < prototype(Neos.Fusion:Component) {
+  home = Neos.Neos:NodeUri {
+    node = ${site}
+  }
+  renderer = afx`
+    <a class="skip-link" href="#main"><Collection.Site:Presentation.Label labelKey="skip" /></a>
+    <header class="site-header">
+      <a class="brand" href={props.home} aria-label={MarineGuide.label('brand.home', documentNode)}>
+        <svg class="brand-mark" viewBox="0 0 48 48" fill="none" aria-hidden="true"><path d="M5 26c7-16 15-16 22 0s12 9 16-3M5 35c7-8 12-8 20 0s13 6 18-2" stroke="currentColor" stroke-width="3" stroke-linecap="round"/><circle cx="34" cy="12" r="4" fill="currentColor"/></svg>
+        <span><Collection.Site:Presentation.Label labelKey="brand" /><small><Collection.Site:Presentation.Label labelKey="brand.subtitle" /></small></span>
+      </a>
+      <nav class="main-nav" aria-label={MarineGuide.label('nav.label', documentNode)}>
+        <a href="#guide"><Collection.Site:Presentation.Label labelKey="nav.explore" /></a><a href={'#marine-' + documentNode.aggregateId.value + '-sources'}><Collection.Site:Presentation.Label labelKey="nav.sources" /></a>
+        <a class="museum-link" href="https://www.nmmba.gov.tw/"><Collection.Site:Presentation.Label labelKey="nav.museum" /> <span aria-hidden="true">↗</span></a>
+      </nav>
+      <Collection.Site:Presentation.LanguageMenu />
+    </header>
+  `
+}
+
+prototype(Collection.Site:Presentation.Footer) < prototype(Neos.Fusion:Component) {
+  renderer = afx`
+    <footer class="site-footer">
+      <div><span class="footer-brand"><Collection.Site:Presentation.Label labelKey="footer.title" /></span><p><Collection.Site:Presentation.Label labelKey="footer.intro" /></p></div>
+      <p class="footer-note"><Collection.Site:Presentation.Label labelKey="footer.theme" /><br /><Collection.Site:Presentation.Label labelKey="footer.note" /></p>
+      <a href="#main"><Collection.Site:Presentation.Label labelKey="footer.top" /> ↑</a>
+    </footer>
+  `
+}
+prototype(Collection.Site:Presentation.Label) < prototype(Neos.Fusion:Component) {
+  labelKey = ''
+  renderer = ${String.htmlSpecialChars(MarineGuide.label(props.labelKey, documentNode))}
+}
+
+prototype(Collection.Site:Presentation.LanguageMenu) < prototype(Neos.Fusion:Component) {
+  items = Neos.Neos:DimensionsMenuItems {
+    dimension = 'language'
+    presets = ${['en', 'zh']}
+  }
+  language = ${MarineGuide.language(documentNode)}
+  renderer = afx`
+    <nav class="language-switch" aria-label={MarineGuide.label('language', documentNode)}>
+      <Neos.Fusion:Loop items={props.items} itemName="languageItem">
+        <a @if.available={languageItem.uri} href={languageItem.uri} data-language-link={languageItem.targetDimensions.language.value} lang={languageItem.targetDimensions.language.value == 'zh' ? 'zh-Hant' : 'en'} hreflang={languageItem.targetDimensions.language.value == 'zh' ? 'zh-Hant' : 'en'} aria-current={languageItem.targetDimensions.language.value == props.language ? 'page' : null}>{String.htmlSpecialChars(languageItem.label)}</a>
+      </Neos.Fusion:Loop>
+    </nav>
+  `
+}

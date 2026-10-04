@@ -1,0 +1,49 @@
+Neos:
+  Fusion:
+    defaultContext:
+      MarineGuide: Collection\Site\Eel\GuideHelper
+  ContentRepositoryRegistry:
+    contentRepositories:
+      default:
+        contentDimensions:
+          language:
+            label: 'Language / 語言'
+            icon: language
+            values:
+              en:
+                label: English
+              zh:
+                label: 繁體中文
+          audience:
+            label: 受眾
+            icon: users
+            values:
+              adult:
+                label: 成人
+                specializations:
+                  children:
+                    label: 兒童
+                  expert:
+                    label: 專家
+  Neos:
+    sites:
+      collection:
+        preset: default
+        contentDimensions:
+          defaultDimensionSpacePoint:
+            language: en
+            audience: adult
+          resolver:
+            factoryClassName: Neos\Neos\FrontendRouting\DimensionResolution\Resolver\UriPathResolverFactory
+            options:
+              separator: '-'
+              segments:
+                - dimensionIdentifier: language
+                  dimensionValueMapping:
+                    en: ''
+                    zh: zh
+                - dimensionIdentifier: audience
+                  dimensionValueMapping:
+                    children: children
+                    adult: ''
+                    expert: experts

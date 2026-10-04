@@ -10,5 +10,10 @@
         "neos": {
             "package-key": "Collection.Site"
         }
+    },
+    "autoload": {
+        "psr-4": {
+            "Collection\\Site\\": "Classes/"
+        }
     }
 }

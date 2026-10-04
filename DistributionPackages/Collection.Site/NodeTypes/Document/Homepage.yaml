@@ -1,6 +1,37 @@
 'Collection.Site:Document.Homepage':
   superTypes:
     'Neos.Neos:Site': true
+    'Collection.Site:Mixin.Guide': true
   ui:
-    label: '典藏與導覽首頁'
-    icon: globe
+    label: 海生館・探索首頁
+    icon: water
+    inspector:
+      groups:
+        hero:
+          label: 首頁主視覺
+          position: 80
+  constraints:
+    nodeTypes:
+      '*': false
+      'Collection.Site:Document.Guide': true
+      'Neos.Neos:Document': false
+  properties:
+    heroTitle:
+      type: string
+      scope: specializations
+      defaultValue: 讓玳瑁的回家路，少一點傷害。
+      ui:
+        label: 首頁標題
+        reloadPageIfChanged: true
+        inspector:
+          group: hero
+    heroIntro:
+      type: string
+      scope: specializations
+      defaultValue: 從一隻海龜出發：孩子學會心疼，大人找到行動，研究者追問保育是否有效。
+      ui:
+        label: 首頁引言
+        reloadPageIfChanged: true
+        inspector:
+          group: hero
+          editor: Neos.Neos/Inspector/Editors/TextAreaEditor

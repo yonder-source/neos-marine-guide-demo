@@ -3,6 +3,7 @@
   "dockerComposeFile": "../compose.yaml",
   "service": "neos",
   "workspaceFolder": "/app",
+  "overrideCommand": false,
   "shutdownAction": "stopCompose",
   "customizations": {
     "vscode": {

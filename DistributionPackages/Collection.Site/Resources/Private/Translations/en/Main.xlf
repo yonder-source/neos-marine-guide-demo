@@ -1,0 +1,283 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
+  <file source-language="en" target-language="en" datatype="plaintext" original="Main">
+    <body>
+      <trans-unit id="brand">
+        <source>Ocean Field Notes</source>
+        <target>Ocean Field Notes</target>
+      </trans-unit>
+      <trans-unit id="brand.subtitle">
+        <source>NMMBA-inspired · Interactive guide</source>
+        <target>NMMBA-inspired · Interactive guide</target>
+      </trans-unit>
+      <trans-unit id="brand.home">
+        <source>Ocean Field Notes home</source>
+        <target>Ocean Field Notes home</target>
+      </trans-unit>
+      <trans-unit id="skip">
+        <source>Skip to main content</source>
+        <target>Skip to main content</target>
+      </trans-unit>
+      <trans-unit id="description">
+        <source>Meet the hawksbill: empathy for children, conservation actions for adults, and Taiwan’s rescue data, research and policy for experts.</source>
+        <target>Meet the hawksbill: empathy for children, conservation actions for adults, and Taiwan’s rescue data, research and policy for experts.</target>
+      </trans-unit>
+      <trans-unit id="nav.label">
+        <source>Main navigation</source>
+        <target>Main navigation</target>
+      </trans-unit>
+      <trans-unit id="nav.explore">
+        <source>Explore</source>
+        <target>Explore</target>
+      </trans-unit>
+      <trans-unit id="nav.sources">
+        <source>Read more</source>
+        <target>Read more</target>
+      </trans-unit>
+      <trans-unit id="nav.museum">
+        <source>Museum info</source>
+        <target>Museum info</target>
+      </trans-unit>
+      <trans-unit id="language">
+        <source>Choose language</source>
+        <target>Choose language</target>
+      </trans-unit>
+      <trans-unit id="footer.title">
+        <source>An ocean of things to wonder about.</source>
+        <target>An ocean of things to wonder about.</target>
+      </trans-unit>
+      <trans-unit id="footer.intro">
+        <source>One encounter. A deeper understanding of the ocean.</source>
+        <target>One encounter. A deeper understanding of the ocean.</target>
+      </trans-unit>
+      <trans-unit id="footer.theme">
+        <source>Inspired by Taiwan’s National Museum of Marine Biology &amp; Aquarium</source>
+        <target>Inspired by Taiwan’s National Museum of Marine Biology &amp; Aquarium</target>
+      </trans-unit>
+      <trans-unit id="footer.note">
+        <source>Independent design demo · Unofficial website</source>
+        <target>Independent design demo · Unofficial website</target>
+      </trans-unit>
+      <trans-unit id="footer.top">
+        <source>Back to top</source>
+        <target>Back to top</target>
+      </trans-unit>
+      <trans-unit id="hero.start">
+        <source>Find my way to help</source>
+        <target>Find my way to help</target>
+      </trans-unit>
+      <trans-unit id="hero.location">
+        <source>Checheng, Pingtung · Taiwan</source>
+        <target>Checheng, Pingtung · Taiwan</target>
+      </trans-unit>
+      <trans-unit id="hero.perspectives">
+        <source>One hawksbill. Three ways to care.</source>
+        <target>One hawksbill. Three ways to care.</target>
+      </trans-unit>
+      <trans-unit id="explore.intro">
+        <source>Start with care. </source>
+        <target>Start with care. </target>
+      </trans-unit>
+      <trans-unit id="explore.emphasis">
+        <source>Turn concern into action.</source>
+        <target>Turn concern into action.</target>
+      </trans-unit>
+      <trans-unit id="explore.down">
+        <source>Dive in</source>
+        <target>Dive in</target>
+      </trans-unit>
+      <trans-unit id="guides.next">
+        <source>Your next ocean encounter</source>
+        <target>Your next ocean encounter</target>
+      </trans-unit>
+      <trans-unit id="visit.title">
+        <source>Take your curiosity to the aquarium.</source>
+        <target>Take your curiosity to the aquarium.</target>
+      </trans-unit>
+      <trans-unit id="visit.intro">
+        <source>Find exhibits, plan a visit and discover more through the museum’s official resources.</source>
+        <target>Find exhibits, plan a visit and discover more through the museum’s official resources.</target>
+      </trans-unit>
+      <trans-unit id="visit.link">
+        <source>Visit the museum website</source>
+        <target>Visit the museum website</target>
+      </trans-unit>
+      <trans-unit id="visit.more">
+        <source>Explore the museum’s official resources</source>
+        <target>Explore the museum’s official resources</target>
+      </trans-unit>
+      <trans-unit id="duration.before">
+        <source>About</source>
+        <target>About</target>
+      </trans-unit>
+      <trans-unit id="duration.after">
+        <source>min · Switch perspectives anytime</source>
+        <target>min · Switch perspectives anytime</target>
+      </trans-unit>
+      <trans-unit id="audience.label">
+        <source>Choose your guide perspective</source>
+        <target>Choose your guide perspective</target>
+      </trans-unit>
+      <trans-unit id="children.name">
+        <source>Young protectors</source>
+        <target>Children</target>
+      </trans-unit>
+      <trans-unit id="children.hint">
+        <source>Children · Care and protect</source>
+        <target>Children · Care and protect</target>
+      </trans-unit>
+      <trans-unit id="children.panel">
+        <source>Young protectors / Children’s guide</source>
+        <target>Young protectors / Children’s guide</target>
+      </trans-unit>
+      <trans-unit id="adult.name">
+        <source>Ocean advocates</source>
+        <target>Adults</target>
+      </trans-unit>
+      <trans-unit id="adult.hint">
+        <source>Adults · Take part</source>
+        <target>Adults · Take part</target>
+      </trans-unit>
+      <trans-unit id="adult.panel">
+        <source>Ocean advocates / Adult guide</source>
+        <target>Ocean advocates / Adult guide</target>
+      </trans-unit>
+      <trans-unit id="expert.name">
+        <source>Research &amp; policy</source>
+        <target>Experts</target>
+      </trans-unit>
+      <trans-unit id="expert.hint">
+        <source>Experts · Examine the evidence</source>
+        <target>Experts · Examine the evidence</target>
+      </trans-unit>
+      <trans-unit id="expert.panel">
+        <source>Research &amp; policy / Expert guide</source>
+        <target>Research &amp; policy / Expert guide</target>
+      </trans-unit>
+      <trans-unit id="photo.hint">
+        <source>Look closely. The story is in the details.</source>
+        <target>Look closely. The story is in the details.</target>
+      </trans-unit>
+      <trans-unit id="facts.name">
+        <source>Common name</source>
+        <target>Common name</target>
+      </trans-unit>
+      <trans-unit id="facts.scientific">
+        <source>Scientific name / group</source>
+        <target>Scientific name / group</target>
+      </trans-unit>
+      <trans-unit id="facts.habitat">
+        <source>Habitat</source>
+        <target>Habitat</target>
+      </trans-unit>
+      <trans-unit id="collection.link">
+        <source>Browse the museum collection (Chinese)</source>
+        <target>Browse the museum collection (Chinese)</target>
+      </trans-unit>
+      <trans-unit id="followup">
+        <source>Stay curious</source>
+        <target>Stay curious</target>
+      </trans-unit>
+      <trans-unit id="sources.title">
+        <source>Every discovery starts with a source.</source>
+        <target>Every discovery starts with a source.</target>
+      </trans-unit>
+      <trans-unit id="sources.image">
+        <source>Image source</source>
+        <target>Image source</target>
+      </trans-unit>
+      <trans-unit id="sources.note">
+        <source>The species photo is separate from the rescue cases. See the expert view for each statistic’s period and species scope.</source>
+        <target>The species photo is separate from the rescue cases. See the expert view for each statistic’s period and species scope.</target>
+      </trans-unit>
+      <trans-unit id="quiz.turn">
+        <source>Look, think, choose</source>
+        <target>Look, think, choose</target>
+      </trans-unit>
+      <trans-unit id="quiz.explanation">
+        <source>See the answer and explanation</source>
+        <target>See the answer and explanation</target>
+      </trans-unit>
+      <trans-unit id="quiz.reset">
+        <source>Try again</source>
+        <target>Try again</target>
+      </trans-unit>
+      <trans-unit id="quiz.correct">
+        <source>That’s right! </source>
+        <target>That’s right! </target>
+      </trans-unit>
+      <trans-unit id="quiz.incorrect">
+        <source>Take another look. There’s a better answer. Revisit the photo and guide, or open the explanation below.</source>
+        <target>Take another look. There’s a better answer. Revisit the photo and guide, or open the explanation below.</target>
+      </trans-unit>
+      <trans-unit id="image.license">
+        <source>Image licence: CC BY 2.0</source>
+        <target>Image licence: CC BY 2.0</target>
+      </trans-unit>
+      <trans-unit id="actions.title">
+        <source>Choose a place to start</source>
+        <target>Choose a place to start</target>
+      </trans-unit>
+      <trans-unit id="actions.choose">
+        <source>Add to my actions</source>
+        <target>Add to my actions</target>
+      </trans-unit>
+      <trans-unit id="actions.empty">
+        <source>Choose an action, then follow its official link.</source>
+        <target>Choose an action, then follow its official link.</target>
+      </trans-unit>
+      <trans-unit id="actions.selected">
+        <source>Actions selected: {count}. Follow the card links to learn how to take part.</source>
+        <target>Actions selected: {count}. Follow the card links to learn how to take part.</target>
+      </trans-unit>
+      <trans-unit id="evidence.title">
+        <source>Read the evidence</source>
+        <target>Read the evidence</target>
+      </trans-unit>
+      <trans-unit id="deck.previous">
+        <source>Previous</source>
+        <target>Previous</target>
+      </trans-unit>
+      <trans-unit id="deck.next">
+        <source>Next</source>
+        <target>Next</target>
+      </trans-unit>
+      <trans-unit id="deck.home">
+        <source>Start over</source>
+        <target>Start over</target>
+      </trans-unit>
+      <trans-unit id="deck.cover">
+        <source>Meet the hawksbill</source>
+        <target>Meet the hawksbill</target>
+      </trans-unit>
+      <trans-unit id="deck.observe">
+        <source>Look closer</source>
+        <target>Look closer</target>
+      </trans-unit>
+      <trans-unit id="deck.story">
+        <source>Your perspective</source>
+        <target>Your perspective</target>
+      </trans-unit>
+      <trans-unit id="deck.quiz">
+        <source>Try a question</source>
+        <target>Try a question</target>
+      </trans-unit>
+      <trans-unit id="deck.actions">
+        <source>Choose your actions</source>
+        <target>Choose your actions</target>
+      </trans-unit>
+      <trans-unit id="deck.sources">
+        <source>Sources &amp; credits</source>
+        <target>Sources &amp; credits</target>
+      </trans-unit>
+      <trans-unit id="deck.more">
+        <source>Keep wondering</source>
+        <target>Keep wondering</target>
+      </trans-unit>
+      <trans-unit id="deck.navigation">
+        <source>Guide pages</source>
+        <target>Guide pages</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

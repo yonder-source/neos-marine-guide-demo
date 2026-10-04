@@ -1,0 +1,11 @@
+'Collection.Site:Document.Guide':
+  superTypes:
+    'Neos.Neos:Document': true
+    'Collection.Site:Mixin.Guide': true
+  ui:
+    label: 海洋生物・互動導覽
+    icon: fish
+  constraints:
+    nodeTypes:
+      '*': false
+      'Neos.Neos:Document': false

@@ -1,0 +1,3 @@
+prototype(Collection.Site:Content.InteractiveGuide) < prototype(Neos.Neos:ContentComponent) {
+  renderer = afx`<Collection.Site:Presentation.Guide />`
+}

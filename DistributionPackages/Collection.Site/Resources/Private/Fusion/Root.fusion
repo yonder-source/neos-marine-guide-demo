@@ -1,1 +1,2 @@
+include: resource://Collection.Site/Private/Fusion/Presentation/**/*.fusion
 include: nodetypes://Collection.Site/**/*.fusion

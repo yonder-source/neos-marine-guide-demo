@@ -1,0 +1,848 @@
+'Collection.Site:Mixin.Guide':
+  abstract: true
+  ui:
+    inspector:
+      groups:
+        identity:
+          label: 生物與導覽
+          position: 100
+          icon: fish
+        image:
+          label: 圖片與出處
+          position: 110
+          icon: fish
+        audience:
+          label: 受眾內容
+          position: 120
+          icon: fish
+        observation:
+          label: 照片觀察
+          position: 150
+          icon: fish
+        sources:
+          label: 延伸資料
+          position: 160
+          icon: fish
+        actions:
+          label: 成人保育行動
+          position: 145
+          icon: hands-helping
+        evidence:
+          label: 專家資料與來源
+          position: 146
+          icon: book
+  properties:
+    title:
+      type: string
+      scope: specializations
+    guideTitle:
+      type: string
+      scope: specializations
+      defaultValue: 玳瑁，值得被好好保護
+      ui:
+        label: 導覽標題
+        reloadPageIfChanged: true
+        inspector:
+          group: identity
+          position: 1
+    commonName:
+      type: string
+      scope: specializations
+      defaultValue: 玳瑁
+      ui:
+        label: 生物名稱
+        reloadPageIfChanged: true
+        inspector:
+          group: identity
+          position: 2
+    scientificName:
+      type: string
+      scope: specializations
+      defaultValue: 'Eretmochelys imbricata'
+      ui:
+        label: 學名或類群
+        reloadPageIfChanged: true
+        inspector:
+          group: identity
+          position: 3
+    category:
+      type: string
+      scope: specializations
+      defaultValue: 海龜救傷與保育
+      ui:
+        label: 探索主題
+        reloadPageIfChanged: true
+        inspector:
+          group: identity
+          position: 4
+    habitat:
+      type: string
+      scope: specializations
+      defaultValue: 熱帶與亞熱帶海域・珊瑚礁周邊
+      ui:
+        label: 棲地
+        reloadPageIfChanged: true
+        inspector:
+          group: identity
+          position: 5
+    duration:
+      type: integer
+      scope: specializations
+      defaultValue: 8
+      ui:
+        label: 建議分鐘數
+        reloadPageIfChanged: true
+        inspector:
+          group: identity
+          position: 6
+    imageAlt:
+      type: string
+      scope: specializations
+      defaultValue: 一隻玳瑁在藍色海水中游泳，可見彎曲的吻部、花紋背甲與伸展的鰭肢。
+      ui:
+        label: 圖片替代文字
+        reloadPageIfChanged: true
+        inspector:
+          group: image
+          position: 7
+    imageCaption:
+      type: string
+      scope: specializations
+      defaultValue: 玳瑁物種示意照片・非下列救傷個案；使用來源縮圖，未改繪
+      ui:
+        label: 圖片說明
+        reloadPageIfChanged: true
+        inspector:
+          group: image
+          position: 8
+    imageCredit:
+      type: string
+      scope: specializations
+      defaultValue: 'Caroline S. Rogers / U.S. Fish and Wildlife Service · CC BY 2.0'
+      ui:
+        label: 攝影與授權
+        reloadPageIfChanged: true
+        inspector:
+          group: image
+          position: 9
+    imageSourceUrl:
+      type: string
+      scope: specializations
+      defaultValue: 'https://commons.wikimedia.org/wiki/File:Hawksbill_Sea_Turtle_Carey_de_Concha_(5840602412).jpg'
+      ui:
+        label: 圖片出處網址
+        reloadPageIfChanged: true
+        inspector:
+          group: image
+          position: 10
+    audienceTitle:
+      type: string
+      scope: node
+      defaultValue: 把關心，變成做得到的保育行動。
+      ui:
+        label: 導覽標題
+        reloadPageIfChanged: true
+        inspector:
+          group: audience
+          position: 11
+    audienceBody:
+      type: string
+      scope: node
+      defaultValue: 你不需要先成為海洋專家。選擇一項能持續參與的行動：提供不干擾動物的目擊照片、參加正式保育活動，或學會正確通報。先選一件，再從官方入口開始。
+      ui:
+        label: 導覽內容
+        reloadPageIfChanged: true
+        inspector:
+          group: audience
+          position: 12
+          editor: Neos.Neos/Inspector/Editors/TextAreaEditor
+    observationOneTitle:
+      type: string
+      scope: specializations
+      defaultValue: 看看像鳥喙的吻部
+      ui:
+        label: 觀察點一
+        reloadPageIfChanged: true
+        inspector:
+          group: observation
+          position: 17
+    observationOneBody:
+      type: string
+      scope: specializations
+      defaultValue: 玳瑁的吻部較尖、向下彎曲。從照片認識外形就好，不必追近、觸摸或餵食牠。
+      ui:
+        label: 觀察點一說明
+        reloadPageIfChanged: true
+        inspector:
+          group: observation
+          position: 18
+          editor: Neos.Neos/Inspector/Editors/TextAreaEditor
+    observationTwoTitle:
+      type: string
+      scope: specializations
+      defaultValue: 美麗的背甲，不該成為商品
+      ui:
+        label: 觀察點二
+        reloadPageIfChanged: true
+        inspector:
+          group: observation
+          position: 19
+    observationTwoBody:
+      type: string
+      scope: specializations
+      defaultValue: 背甲的花紋令人印象深刻；玳瑁也曾因龜甲交易遭大量捕捉。欣賞活著的牠，拒買龜甲製品，是保護的一步。
+      ui:
+        label: 觀察點二說明
+        reloadPageIfChanged: true
+        inspector:
+          group: observation
+          position: 20
+          editor: Neos.Neos/Inspector/Editors/TextAreaEditor
+    sourceTitle:
+      type: string
+      scope: specializations
+      defaultValue: IUCN（2026）：玳瑁全球極危與保育威脅（英文）
+      ui:
+        label: 知識來源名稱
+        reloadPageIfChanged: true
+        inspector:
+          group: sources
+          position: 21
+    sourceUrl:
+      type: string
+      scope: specializations
+      defaultValue: 'https://iucn.org/story/202603/guardians-reef-protecting-hawksbill-turtle-arnavon'
+      ui:
+        label: 知識來源網址
+        reloadPageIfChanged: true
+        inspector:
+          group: sources
+          position: 22
+    followupQuestion:
+      type: string
+      scope: specializations
+      defaultValue: 救回一隻海龜，就代表保育成功了嗎？
+      ui:
+        label: 延伸提問
+        reloadPageIfChanged: true
+        inspector:
+          group: sources
+          position: 23
+    followupAnswer:
+      type: string
+      scope: specializations
+      defaultValue: 救傷讓一個生命多一次機會；長期保育還需要減少纏繞、誤捕、交易與棲地破壞。專家視角整理了通報、照護、資源與研究，幫助我們分辨「做了什麼」與「帶來什麼改變」。
+      ui:
+        label: 延伸回答
+        reloadPageIfChanged: true
+        inspector:
+          group: sources
+          position: 24
+          editor: Neos.Neos/Inspector/Editors/TextAreaEditor
+    audienceQuestion:
+      type: string
+      scope: node
+      defaultValue: 想參與保育，又剛好在海中遇到玳瑁，哪個做法較合適？
+      ui:
+        label: 互動問題
+        reloadPageIfChanged: true
+        inspector:
+          group: audience
+          position: 13
+    audienceOptionA:
+      type: string
+      scope: node
+      defaultValue: 追近一點，拉住牠拍清楚的照片
+      ui:
+        label: 選項 A
+        reloadPageIfChanged: true
+        inspector:
+          group: audience
+          position: 14
+    audienceOptionB:
+      type: string
+      scope: node
+      defaultValue: 不追逐、不觸碰，記錄目擊資訊再回報
+      ui:
+        label: 選項 B
+        reloadPageIfChanged: true
+        inspector:
+          group: audience
+          position: 15
+    audienceOptionC:
+      type: string
+      scope: node
+      defaultValue: 買一隻海龜來放生
+      ui:
+        label: 選項 C
+        reloadPageIfChanged: true
+        inspector:
+          group: audience
+          position: 16
+    audienceCorrect:
+      type: string
+      scope: node
+      defaultValue: b
+      ui:
+        label: 正確選項
+        reloadPageIfChanged: true
+        inspector:
+          group: audience
+          position: 17
+          editor: Neos.Neos/Inspector/Editors/SelectBoxEditor
+          editorOptions:
+            values:
+              a:
+                label: A
+              b:
+                label: B
+              c:
+                label: C
+    audienceExplanation:
+      type: string
+      scope: node
+      defaultValue: 有價值的紀錄不該以干擾動物為代價。安全且不干擾的照片、時間及地點能支持公民科學；動物救傷與野放需由專業團隊評估。
+      ui:
+        label: 答案解析
+        reloadPageIfChanged: true
+        inspector:
+          group: audience
+          position: 18
+          editor: Neos.Neos/Inspector/Editors/TextAreaEditor
+    image:
+      type: Neos\Media\Domain\Model\ImageInterface
+      scope: specializations
+      ui:
+        label: 生物圖片（留空使用示範照片）
+        reloadPageIfChanged: true
+        inspector:
+          group: image
+          position: 1
+    observationOneX:
+      type: integer
+      scope: specializations
+      defaultValue: 12
+      ui:
+        label: 觀察點一水平位置（8–88%）
+        reloadPageIfChanged: true
+        inspector:
+          group: observation
+          editor: Neos.Neos/Inspector/Editors/RangeEditor
+          editorOptions:
+            min: 8
+            max: 88
+            step: 1
+    observationOneY:
+      type: integer
+      scope: specializations
+      defaultValue: 38
+      ui:
+        label: 觀察點一垂直位置（8–88%）
+        reloadPageIfChanged: true
+        inspector:
+          group: observation
+          editor: Neos.Neos/Inspector/Editors/RangeEditor
+          editorOptions:
+            min: 8
+            max: 88
+            step: 1
+    observationTwoX:
+      type: integer
+      scope: specializations
+      defaultValue: 58
+      ui:
+        label: 觀察點二水平位置（8–88%）
+        reloadPageIfChanged: true
+        inspector:
+          group: observation
+          editor: Neos.Neos/Inspector/Editors/RangeEditor
+          editorOptions:
+            min: 8
+            max: 88
+            step: 1
+    observationTwoY:
+      type: integer
+      scope: specializations
+      defaultValue: 39
+      ui:
+        label: 觀察點二垂直位置（8–88%）
+        reloadPageIfChanged: true
+        inspector:
+          group: observation
+          editor: Neos.Neos/Inspector/Editors/RangeEditor
+          editorOptions:
+            min: 8
+            max: 88
+            step: 1
+    imageLicenseUrl:
+      type: string
+      scope: specializations
+      ui:
+        label: 圖片授權網址
+        reloadPageIfChanged: true
+        inspector:
+          group: image
+      defaultValue: 'https://creativecommons.org/licenses/by/2.0/'
+    actionOneUrl:
+      type: string
+      ui:
+        label: 行動一：連結網址
+        reloadPageIfChanged: true
+        inspector:
+          group: actions
+      defaultValue: 'https://turtlefinder.oca.gov.tw/'
+    actionTwoUrl:
+      type: string
+      ui:
+        label: 行動二：連結網址
+        reloadPageIfChanged: true
+        inspector:
+          group: actions
+      defaultValue: 'https://www.nmmba.gov.tw/News.aspx?n=AAF333914F15A63E&sms=AD9EC27AC49C5C7E'
+    actionThreeUrl:
+      type: string
+      ui:
+        label: 行動三：連結網址
+        reloadPageIfChanged: true
+        inspector:
+          group: actions
+      defaultValue: 'https://www.oca.gov.tw/ch/home.jsp?id=376&parentpath=0'
+    metricOneValue:
+      type: string
+      ui:
+        label: 數據一：數值
+        reloadPageIfChanged: true
+        inspector:
+          group: evidence
+      defaultValue: '330'
+    metricTwoValue:
+      type: string
+      ui:
+        label: 數據二：數值
+        reloadPageIfChanged: true
+        inspector:
+          group: evidence
+      defaultValue: '27'
+    metricThreeValue:
+      type: string
+      ui:
+        label: 數據三：數值
+        reloadPageIfChanged: true
+        inspector:
+          group: evidence
+      defaultValue: '8'
+    evidenceOneSourceUrl:
+      type: string
+      ui:
+        label: 證據一：來源網址
+        reloadPageIfChanged: true
+        inspector:
+          group: evidence
+      defaultValue: 'https://www.oca.gov.tw/filedownload?file=bstatistics%2F202603201103382.pdf&filedisplay=114%E5%B9%B4%E5%85%A8%E5%B9%B4%E5%BA%A6%E5%9C%8B%E5%85%A7%E6%B5%B7%E9%BE%9C%E6%93%B1%E6%B7%BA%E4%BA%8B%E4%BB%B6%E7%B5%B1%E8%A8%88.pdf&flag=doc'
+    evidenceOneSecondaryUrl:
+      type: string
+      ui:
+        label: 證據一：第二來源網址
+        reloadPageIfChanged: true
+        inspector:
+          group: evidence
+      defaultValue: 'https://www.oca.gov.tw/filedownload?file=bstatistics%2F202605211208220.pdf&filedisplay=115%E5%B9%B4%E7%AC%AC1%E5%AD%A3%E5%9C%8B%E5%85%A7%E6%B5%B7%E9%BE%9C%E6%93%B1%E6%B7%BA%E4%BA%8B%E4%BB%B6%E7%B5%B1%E8%A8%88.pdf&flag=doc'
+    evidenceTwoSourceUrl:
+      type: string
+      ui:
+        label: 證據二：來源網址
+        reloadPageIfChanged: true
+        inspector:
+          group: evidence
+      defaultValue: 'https://www.nmmba.gov.tw/News_Content.aspx?n=AC9E046F9622F160&s=716C4A850D2C759E&sms=7D7624D5EB39693A'
+    evidenceTwoSecondaryUrl:
+      type: string
+      ui:
+        label: 證據二：第二來源網址
+        reloadPageIfChanged: true
+        inspector:
+          group: evidence
+      defaultValue: 'https://www.nmmba.gov.tw/News_Content.aspx?n=FF40572369107C6E&s=60025C15E93390A0'
+    evidenceThreeSourceUrl:
+      type: string
+      ui:
+        label: 證據三：來源網址
+        reloadPageIfChanged: true
+        inspector:
+          group: evidence
+      defaultValue: 'https://oceanicesg.oca.gov.tw/OcaEsg/MatchingProjectDetail?pk=d0f55dcc-7987-48c5-a231-c2c2e59e7065'
+    evidenceThreeSecondaryUrl:
+      type: string
+      ui:
+        label: 證據三：第二來源網址
+        reloadPageIfChanged: true
+        inspector:
+          group: evidence
+      defaultValue: ''
+    evidenceFourSourceUrl:
+      type: string
+      ui:
+        label: 證據四：來源網址
+        reloadPageIfChanged: true
+        inspector:
+          group: evidence
+      defaultValue: 'https://doi.org/10.3354/esr01472'
+    evidenceFourSecondaryUrl:
+      type: string
+      ui:
+        label: 證據四：第二來源網址
+        reloadPageIfChanged: true
+        inspector:
+          group: evidence
+      defaultValue: 'https://www.sinica.edu.tw/news_content/36/3745'
+    evidenceFiveSourceUrl:
+      type: string
+      ui:
+        label: 證據五：來源網址
+        reloadPageIfChanged: true
+        inspector:
+          group: evidence
+      defaultValue: 'https://www.oca.gov.tw/ch/home.jsp?id=617&parentpath=0'
+    evidenceFiveSecondaryUrl:
+      type: string
+      ui:
+        label: 證據五：第二來源網址
+        reloadPageIfChanged: true
+        inspector:
+          group: evidence
+      defaultValue: 'https://doi.org/10.1186/s12862-025-02354-2'
+    conservationStatus:
+      type: string
+      scope: specializations
+      ui:
+        label: 保育狀態與範圍
+        reloadPageIfChanged: true
+        inspector:
+          group: identity
+      defaultValue: 'IUCN 全球極危（CR）・非台灣特有種'
+    actionOneTitle:
+      type: string
+      ui:
+        label: 行動一：標題
+        reloadPageIfChanged: true
+        inspector:
+          group: actions
+      defaultValue: 讓一次目擊，成為一筆研究紀錄
+    actionOneBody:
+      type: string
+      ui:
+        label: 行動一：說明
+        reloadPageIfChanged: true
+        inspector:
+          group: actions
+          editor: Neos.Neos/Inspector/Editors/TextAreaEditor
+      defaultValue: '已有安全、不干擾拍攝的海龜照片？整理時間、地點與可辨識的影像，至 TurtleFinder 了解目擊回報方式。'
+    actionOneLink:
+      type: string
+      ui:
+        label: 行動一：連結文字
+        reloadPageIfChanged: true
+        inspector:
+          group: actions
+      defaultValue: '前往 TurtleFinder（中文）'
+    actionTwoTitle:
+      type: string
+      ui:
+        label: 行動二：標題
+        reloadPageIfChanged: true
+        inspector:
+          group: actions
+      defaultValue: 參與有組織的保育教育與行動
+    actionTwoBody:
+      type: string
+      ui:
+        label: 行動二：說明
+        reloadPageIfChanged: true
+        inspector:
+          group: actions
+          editor: Neos.Neos/Inspector/Editors/TextAreaEditor
+      defaultValue: 從海生館官方科教活動入口查看當期課程與報名條件。由正式活動開始認識救傷、海洋垃圾與友善觀察，不自行捕捉或野放動物。
+    actionTwoLink:
+      type: string
+      ui:
+        label: 行動二：連結文字
+        reloadPageIfChanged: true
+        inspector:
+          group: actions
+      defaultValue: 查看海生館科教活動（中文）
+    actionThreeTitle:
+      type: string
+      ui:
+        label: 行動三：標題
+        reloadPageIfChanged: true
+        inspector:
+          group: actions
+      defaultValue: 學會求助，讓救援更快到場
+    actionThreeBody:
+      type: string
+      ui:
+        label: 行動三：說明
+        reloadPageIfChanged: true
+        inspector:
+          group: actions
+          editor: Neos.Neos/Inspector/Editors/TextAreaEditor
+      defaultValue: '在台灣遇到擱淺或受困海龜，撥打海巡 118，提供地點、時間與狀況；保持安全距離，依專業人員指示處理。'
+    actionThreeLink:
+      type: string
+      ui:
+        label: 行動三：連結文字
+        reloadPageIfChanged: true
+        inspector:
+          group: actions
+      defaultValue: 閱讀海保救援網通報指引（中文）
+    evidenceUpdated:
+      type: string
+      ui:
+        label: 資料查核日期與更新頻率
+        reloadPageIfChanged: true
+        inspector:
+          group: evidence
+      defaultValue: 資料查核：2026-09-28・年度／季報與研究摘錄，非即時監測
+    metricOneLabel:
+      type: string
+      ui:
+        label: 數據一：指標名稱
+        reloadPageIfChanged: true
+        inspector:
+          group: evidence
+      defaultValue: 全體海龜擱淺數
+    metricOneScope:
+      type: string
+      ui:
+        label: 數據一：期間與範圍
+        reloadPageIfChanged: true
+        inspector:
+          group: evidence
+      defaultValue: '台灣・2025 全年・隻'
+    metricTwoLabel:
+      type: string
+      ui:
+        label: 數據二：指標名稱
+        reloadPageIfChanged: true
+        inspector:
+          group: evidence
+      defaultValue: 其中玳瑁
+    metricTwoScope:
+      type: string
+      ui:
+        label: 數據二：期間與範圍
+        reloadPageIfChanged: true
+        inspector:
+          group: evidence
+      defaultValue: '台灣・2025 全年・隻'
+    metricThreeLabel:
+      type: string
+      ui:
+        label: 數據三：指標名稱
+        reloadPageIfChanged: true
+        inspector:
+          group: evidence
+      defaultValue: 玳瑁擱淺數
+    metricThreeScope:
+      type: string
+      ui:
+        label: 數據三：期間與範圍
+        reloadPageIfChanged: true
+        inspector:
+          group: evidence
+      defaultValue: '台灣・2026 第 1 季・隻'
+    evidenceOneTitle:
+      type: string
+      ui:
+        label: 證據一：標題
+        reloadPageIfChanged: true
+        inspector:
+          group: evidence
+      defaultValue: '01 ／ 台灣通報統計：數字代表什麼？'
+    evidenceOneBody:
+      type: string
+      ui:
+        label: 證據一：說明
+        reloadPageIfChanged: true
+        inspector:
+          group: evidence
+          editor: Neos.Neos/Inspector/Editors/TextAreaEditor
+      defaultValue: |-
+        2025 全年：330 件通報、330 隻海龜；發現時活體 133 隻、死亡 197 隻，其中玳瑁 27 隻。
+        2026 第 1 季：132 件通報、132 隻海龜；活體 51 隻、死亡 81 隻，其中玳瑁 8 隻。
+        這是擱淺事件統計，不是野外族群估計，也不是收容治癒率。年度與單季期間不同，不能直接解讀為增減趨勢；表中未提供玳瑁個別死因與照護結局。
+    evidenceOneSourceTitle:
+      type: string
+      ui:
+        label: 證據一：來源名稱
+        reloadPageIfChanged: true
+        inspector:
+          group: evidence
+      defaultValue: '海保署：2025 全年原表（PDF）'
+    evidenceOneSecondaryTitle:
+      type: string
+      ui:
+        label: 證據一：第二來源名稱
+        reloadPageIfChanged: true
+        inspector:
+          group: evidence
+      defaultValue: '海保署：2026 第 1 季原表（PDF）'
+    evidenceTwoTitle:
+      type: string
+      ui:
+        label: 證據二：標題
+        reloadPageIfChanged: true
+        inspector:
+          group: evidence
+      defaultValue: '02 ／ 救傷案例：能追到哪個階段？'
+    evidenceTwoBody:
+      type: string
+      ui:
+        label: 證據二：說明
+        reloadPageIfChanged: true
+        inspector:
+          group: evidence
+          editor: Neos.Neos/Inspector/Editors/TextAreaEditor
+      defaultValue: |-
+        海生館 2019-06-09 收容一隻在高雄蚵子寮通報的玳瑁，紀錄列出體重 1.7 公斤、背甲曲線長 29 公分。該則紀錄沒有交代最終野放或死亡結果，不能計入已成功救治。
+        海生館另於 2026-03-26 報告，自海委會成立後合作野放累計達第 118 隻海龜；這是跨物種的累計成果，並非 118 隻玳瑁，也不是當年度數量。
+    evidenceTwoSourceTitle:
+      type: string
+      ui:
+        label: 證據二：來源名稱
+        reloadPageIfChanged: true
+        inspector:
+          group: evidence
+      defaultValue: '海生館：2019 玳瑁收容個案'
+    evidenceTwoSecondaryTitle:
+      type: string
+      ui:
+        label: 證據二：第二來源名稱
+        reloadPageIfChanged: true
+        inspector:
+          group: evidence
+      defaultValue: '海生館：2026 合作野放紀錄'
+    evidenceThreeTitle:
+      type: string
+      ui:
+        label: 證據三：標題
+        reloadPageIfChanged: true
+        inspector:
+          group: evidence
+      defaultValue: '03 ／ 資源：執行成果與經費需求分開看'
+    evidenceThreeBody:
+      type: string
+      ui:
+        label: 證據三：說明
+        reloadPageIfChanged: true
+        inspector:
+          group: evidence
+          editor: Neos.Neos/Inspector/Editors/TextAreaEditor
+      defaultValue: |-
+        海生館在海保署 ESG 平台揭露：2025 年辦理 10 場野放、共野放 17 隻海龜，工作涵蓋通報、收容醫療與野放。
+        2026「海龜返家・企業 ESG 同行」教育計畫列出總經費需求新臺幣 217 萬元。這是海龜保育教育專案的募資／媒合需求，不是已支出金額，也不是玳瑁救傷或復育專款。
+        此來源不足以推算每隻玳瑁的照護成本或台灣復育總投入；仍需支出明細、物種別收容日數與野放後追蹤成果。
+    evidenceThreeSourceTitle:
+      type: string
+      ui:
+        label: 證據三：來源名稱
+        reloadPageIfChanged: true
+        inspector:
+          group: evidence
+      defaultValue: '海保署 ESG 平台：115-A(B)-0004 計畫與實績'
+    evidenceThreeSecondaryTitle:
+      type: string
+      ui:
+        label: 證據三：第二來源名稱
+        reloadPageIfChanged: true
+        inspector:
+          group: evidence
+      defaultValue: ''
+    evidenceFourTitle:
+      type: string
+      ui:
+        label: 證據四：標題
+        reloadPageIfChanged: true
+        inspector:
+          group: evidence
+      defaultValue: '04 ／ 舊傷與學術研究：跨物種外推的界線'
+    evidenceFourBody:
+      type: string
+      ui:
+        label: 證據四：說明
+        reloadPageIfChanged: true
+        inspector:
+          group: evidence
+          editor: Neos.Neos/Inspector/Editors/TextAreaEditor
+      defaultValue: |-
+        Fong 等（2026）整理小琉球 2010–2024 年共 7,233 筆觀察、709 隻海龜；曾受傷個體包含 105 隻綠蠵龜與 1 隻玳瑁。傷口癒合時間的詳細分析來自 13 隻長期追蹤綠蠵龜。
+        這提供人為傷害與長期觀察的證據，但不能把綠蠵龜的癒合天數直接套用到玳瑁。機會性影像資料也受拍攝地點、可見個體與回報頻率影響，不能當作台灣所有玳瑁的受傷比例。
+    evidenceFourSourceTitle:
+      type: string
+      ui:
+        label: 證據四：來源名稱
+        reloadPageIfChanged: true
+        inspector:
+          group: evidence
+      defaultValue: 'Fong et al.（2026），Endangered Species Research（DOI）'
+    evidenceFourSecondaryTitle:
+      type: string
+      ui:
+        label: 證據四：第二來源名稱
+        reloadPageIfChanged: true
+        inspector:
+          group: evidence
+      defaultValue: '中央研究院：2026-04-14 研究說明'
+    evidenceFiveTitle:
+      type: string
+      ui:
+        label: 證據五：標題
+        reloadPageIfChanged: true
+        inspector:
+          group: evidence
+      defaultValue: '05 ／ 政策方向：制度、研究建議與成效'
+    evidenceFiveBody:
+      type: string
+      ui:
+        label: 證據五：說明
+        reloadPageIfChanged: true
+        inspector:
+          group: evidence
+          editor: Neos.Neos/Inspector/Editors/TextAreaEditor
+      defaultValue: |-
+        《海洋保育法》及配套子法自 2025-07-01 全面施行；海保署資料另列「整體海洋保護區管理政策方針」於 2026-07-27 核定，顯示政策採保護區、棲地管理與復育制度並行。
+        Fong 等（2025）的台灣公民科學研究可供覓食棲地與威脅分析參考。研究建議不等於已全面採行的政策；判斷執行成效仍需核對管理範圍、執行與支出資料，以及長期監測結果。
+    evidenceFiveSourceTitle:
+      type: string
+      ui:
+        label: 證據五：來源名稱
+        reloadPageIfChanged: true
+        inspector:
+          group: evidence
+      defaultValue: 海保署：海洋保育法與子法推動歷程
+    evidenceFiveSecondaryTitle:
+      type: string
+      ui:
+        label: 證據五：第二來源名稱
+        reloadPageIfChanged: true
+        inspector:
+          group: evidence
+      defaultValue: 'Fong et al.（2025），BMC Ecology and Evolution（DOI）'
+    speciesSourceTitle:
+      type: string
+      scope: specializations
+      defaultValue: NOAA：玳瑁外形、生態與威脅（英文）
+      ui:
+        label: 物種來源名稱
+        reloadPageIfChanged: true
+        inspector:
+          group: sources
+    speciesSourceUrl:
+      type: string
+      scope: specializations
+      defaultValue: 'https://www.fisheries.noaa.gov/species/hawksbill-turtle'
+      ui:
+        label: 物種來源網址
+        reloadPageIfChanged: true
+        inspector:
+          group: sources

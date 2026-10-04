@@ -1,0 +1,8 @@
+'Collection.Site:Content.InteractiveGuide':
+  superTypes:
+    'Neos.Neos:Content': true
+    'Collection.Site:Mixin.Guide': true
+  ui:
+    label: 海洋互動導覽
+    icon: fish
+    group: general

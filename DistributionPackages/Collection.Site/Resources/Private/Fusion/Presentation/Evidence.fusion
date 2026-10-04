@@ -1,0 +1,20 @@
+prototype(Collection.Site:Presentation.Evidence) < prototype(Neos.Fusion:Component) {
+  id = ''
+  metrics = ${[]}
+  items = ${[]}
+  updated = ''
+  renderer = afx`
+    <section class="evidence-dossier" data-evidence aria-labelledby={props.id + '-evidence-heading'} @if.hasItems={Array.length(props.items) > 0}>
+      <h4 id={props.id + '-evidence-heading'}><Collection.Site:Presentation.Label labelKey="evidence.title" /></h4>
+      <p class="evidence-updated">{String.htmlSpecialChars(props.updated)}</p>
+      <dl class="evidence-metrics">
+        <Neos.Fusion:Loop items={props.metrics} itemName="metric"><div><dt>{String.htmlSpecialChars(metric.label)}</dt><dd>{String.htmlSpecialChars(metric.value)}<small>{String.htmlSpecialChars(metric.scope)}</small></dd></div></Neos.Fusion:Loop>
+      </dl>
+      <div class="evidence-sections">
+        <Neos.Fusion:Loop items={props.items} itemName="evidence">
+          <details class="evidence-section"><summary>{String.htmlSpecialChars(evidence.title)}</summary><div><p>{String.htmlSpecialChars(evidence.body)}</p><ul class="evidence-links"><li @if.hasSource={evidence.sourceUrl}><a href={evidence.sourceUrl}>{String.htmlSpecialChars(evidence.sourceTitle)} ↗</a></li><li @if.hasSecondary={evidence.secondaryUrl}><a href={evidence.secondaryUrl}>{String.htmlSpecialChars(evidence.secondaryTitle)} ↗</a></li></ul></div></details>
+        </Neos.Fusion:Loop>
+      </div>
+    </section>
+  `
+}

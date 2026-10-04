@@ -1,0 +1,7 @@
+prototype(Collection.Site:Document.Guide) < prototype(Collection.Site:Presentation.Page) {
+  body = afx`
+    <Collection.Site:Presentation.Header />
+    <main id="main" tabindex="-1" class="guide-page page-container"><div id="guide"><Collection.Site:Presentation.Guide /></div><div id="sources"><a class="source-link" href="https://www.nmmba.gov.tw/"><Collection.Site:Presentation.Label labelKey="visit.more" /> ↗</a></div></main>
+    <Collection.Site:Presentation.Footer />
+  `
+}

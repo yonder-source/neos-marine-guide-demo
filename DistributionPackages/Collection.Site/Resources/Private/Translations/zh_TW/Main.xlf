@@ -1,0 +1,283 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
+  <file source-language="en" target-language="zh-TW" datatype="plaintext" original="Main">
+    <body>
+      <trans-unit id="brand">
+        <source>Ocean Field Notes</source>
+        <target>海洋探索筆記</target>
+      </trans-unit>
+      <trans-unit id="brand.subtitle">
+        <source>NMMBA-inspired · Interactive guide</source>
+        <target>國立海生館主題 · 導覽練習</target>
+      </trans-unit>
+      <trans-unit id="brand.home">
+        <source>Ocean Field Notes home</source>
+        <target>海洋探索筆記首頁</target>
+      </trans-unit>
+      <trans-unit id="skip">
+        <source>Skip to main content</source>
+        <target>跳到主要內容</target>
+      </trans-unit>
+      <trans-unit id="description">
+        <source>Meet the hawksbill: empathy for children, conservation actions for adults, and Taiwan’s rescue data, research and policy for experts.</source>
+        <target>以玳瑁為起點，讓兒童學會保護、成人參與保育、專家查核台灣救傷統計、研究與政策。</target>
+      </trans-unit>
+      <trans-unit id="nav.label">
+        <source>Main navigation</source>
+        <target>主要導覽</target>
+      </trans-unit>
+      <trans-unit id="nav.explore">
+        <source>Explore</source>
+        <target>探索生物</target>
+      </trans-unit>
+      <trans-unit id="nav.sources">
+        <source>Read more</source>
+        <target>延伸閱讀</target>
+      </trans-unit>
+      <trans-unit id="nav.museum">
+        <source>Museum info</source>
+        <target>場館資訊</target>
+      </trans-unit>
+      <trans-unit id="language">
+        <source>Choose language</source>
+        <target>切換語言</target>
+      </trans-unit>
+      <trans-unit id="footer.title">
+        <source>An ocean of things to wonder about.</source>
+        <target>海洋很大，好奇心也是。</target>
+      </trans-unit>
+      <trans-unit id="footer.intro">
+        <source>One encounter. A deeper understanding of the ocean.</source>
+        <target>從看見一種生物，到理解一片海。</target>
+      </trans-unit>
+      <trans-unit id="footer.theme">
+        <source>Inspired by Taiwan’s National Museum of Marine Biology &amp; Aquarium</source>
+        <target>國立海生館主題導覽練習</target>
+      </trans-unit>
+      <trans-unit id="footer.note">
+        <source>Independent design demo · Unofficial website</source>
+        <target>獨立設計示範 · 非官方網站</target>
+      </trans-unit>
+      <trans-unit id="footer.top">
+        <source>Back to top</source>
+        <target>回到頂端</target>
+      </trans-unit>
+      <trans-unit id="hero.start">
+        <source>Find my way to help</source>
+        <target>選擇我的守護方式</target>
+      </trans-unit>
+      <trans-unit id="hero.location">
+        <source>Checheng, Pingtung · Taiwan</source>
+        <target>屏東・車城</target>
+      </trans-unit>
+      <trans-unit id="hero.perspectives">
+        <source>One hawksbill. Three ways to care.</source>
+        <target>同一隻玳瑁，三種守護方式</target>
+      </trans-unit>
+      <trans-unit id="explore.intro">
+        <source>Start with care. </source>
+        <target>從心疼牠開始，</target>
+      </trans-unit>
+      <trans-unit id="explore.emphasis">
+        <source>Turn concern into action.</source>
+        <target>把關心變成行動。</target>
+      </trans-unit>
+      <trans-unit id="explore.down">
+        <source>Dive in</source>
+        <target>往下探索</target>
+      </trans-unit>
+      <trans-unit id="guides.next">
+        <source>Your next ocean encounter</source>
+        <target>下一段海洋故事</target>
+      </trans-unit>
+      <trans-unit id="visit.title">
+        <source>Take your curiosity to the aquarium.</source>
+        <target>把好奇心，帶到海生館。</target>
+      </trans-unit>
+      <trans-unit id="visit.intro">
+        <source>Find exhibits, plan a visit and discover more through the museum’s official resources.</source>
+        <target>展區、參觀資訊與更多海洋故事，從場館的官方資源繼續探索。</target>
+      </trans-unit>
+      <trans-unit id="visit.link">
+        <source>Visit the museum website</source>
+        <target>前往海生館官網</target>
+      </trans-unit>
+      <trans-unit id="visit.more">
+        <source>Explore the museum’s official resources</source>
+        <target>繼續探索海生館官方資源</target>
+      </trans-unit>
+      <trans-unit id="duration.before">
+        <source>About</source>
+        <target>約</target>
+      </trans-unit>
+      <trans-unit id="duration.after">
+        <source>min · Switch perspectives anytime</source>
+        <target>分鐘 · 隨時切換視角</target>
+      </trans-unit>
+      <trans-unit id="audience.label">
+        <source>Choose your guide perspective</source>
+        <target>選擇導覽視角</target>
+      </trans-unit>
+      <trans-unit id="children.name">
+        <source>Young protectors</source>
+        <target>兒童版</target>
+      </trans-unit>
+      <trans-unit id="children.hint">
+        <source>Children · Care and protect</source>
+        <target>兒童 · 心疼牠，也保護牠</target>
+      </trans-unit>
+      <trans-unit id="children.panel">
+        <source>Young protectors / Children’s guide</source>
+        <target>小小守護者 / 兒童導覽</target>
+      </trans-unit>
+      <trans-unit id="adult.name">
+        <source>Ocean advocates</source>
+        <target>成人版</target>
+      </trans-unit>
+      <trans-unit id="adult.hint">
+        <source>Adults · Take part</source>
+        <target>成人 · 找到能做的事</target>
+      </trans-unit>
+      <trans-unit id="adult.panel">
+        <source>Ocean advocates / Adult guide</source>
+        <target>保育行動者 / 成人導覽</target>
+      </trans-unit>
+      <trans-unit id="expert.name">
+        <source>Research &amp; policy</source>
+        <target>專家版</target>
+      </trans-unit>
+      <trans-unit id="expert.hint">
+        <source>Experts · Examine the evidence</source>
+        <target>專家 · 查核數據與成效</target>
+      </trans-unit>
+      <trans-unit id="expert.panel">
+        <source>Research &amp; policy / Expert guide</source>
+        <target>研究與政策 / 專家導覽</target>
+      </trans-unit>
+      <trans-unit id="photo.hint">
+        <source>Look closely. The story is in the details.</source>
+        <target>仔細看，故事就在細節裡</target>
+      </trans-unit>
+      <trans-unit id="facts.name">
+        <source>Common name</source>
+        <target>生物名稱</target>
+      </trans-unit>
+      <trans-unit id="facts.scientific">
+        <source>Scientific name / group</source>
+        <target>學名／類群</target>
+      </trans-unit>
+      <trans-unit id="facts.habitat">
+        <source>Habitat</source>
+        <target>棲地線索</target>
+      </trans-unit>
+      <trans-unit id="collection.link">
+        <source>Browse the museum collection (Chinese)</source>
+        <target>查閱海生館典藏系統</target>
+      </trans-unit>
+      <trans-unit id="followup">
+        <source>Stay curious</source>
+        <target>多問一點</target>
+      </trans-unit>
+      <trans-unit id="sources.title">
+        <source>Every discovery starts with a source.</source>
+        <target>每一次探索，都有跡可循。</target>
+      </trans-unit>
+      <trans-unit id="sources.image">
+        <source>Image source</source>
+        <target>影像出處</target>
+      </trans-unit>
+      <trans-unit id="sources.note">
+        <source>The species photo is separate from the rescue cases. See the expert view for each statistic’s period and species scope.</source>
+        <target>物種影像與救傷個案分開呈現；統計期間與物種範圍請見專家資料。</target>
+      </trans-unit>
+      <trans-unit id="quiz.turn">
+        <source>Look, think, choose</source>
+        <target>換你觀察</target>
+      </trans-unit>
+      <trans-unit id="quiz.explanation">
+        <source>See the answer and explanation</source>
+        <target>查看答案與解說</target>
+      </trans-unit>
+      <trans-unit id="quiz.reset">
+        <source>Try again</source>
+        <target>重新觀察</target>
+      </trans-unit>
+      <trans-unit id="quiz.correct">
+        <source>That’s right! </source>
+        <target>答對了！</target>
+      </trans-unit>
+      <trans-unit id="quiz.incorrect">
+        <source>Take another look. There’s a better answer. Revisit the photo and guide, or open the explanation below.</source>
+        <target>再觀察一下，還有更合適的答案。可以回看照片與導覽，或展開下方解說。</target>
+      </trans-unit>
+      <trans-unit id="image.license">
+        <source>Image licence: CC BY 2.0</source>
+        <target>圖片授權：CC BY 2.0</target>
+      </trans-unit>
+      <trans-unit id="actions.title">
+        <source>Choose a place to start</source>
+        <target>選一件，我能開始的事</target>
+      </trans-unit>
+      <trans-unit id="actions.choose">
+        <source>Add to my actions</source>
+        <target>加入我的行動</target>
+      </trans-unit>
+      <trans-unit id="actions.empty">
+        <source>Choose an action, then follow its official link.</source>
+        <target>勾選想做的事，再前往官方入口。</target>
+      </trans-unit>
+      <trans-unit id="actions.selected">
+        <source>Actions selected: {count}. Follow the card links to learn how to take part.</source>
+        <target>已選 {count} 項行動；可從卡片連結開始了解與參與。</target>
+      </trans-unit>
+      <trans-unit id="evidence.title">
+        <source>Read the evidence</source>
+        <target>查核資料與保育成效</target>
+      </trans-unit>
+      <trans-unit id="deck.previous">
+        <source>Previous</source>
+        <target>上一頁</target>
+      </trans-unit>
+      <trans-unit id="deck.next">
+        <source>Next</source>
+        <target>下一頁</target>
+      </trans-unit>
+      <trans-unit id="deck.home">
+        <source>Start over</source>
+        <target>回到開場</target>
+      </trans-unit>
+      <trans-unit id="deck.cover">
+        <source>Meet the hawksbill</source>
+        <target>遇見玳瑁</target>
+      </trans-unit>
+      <trans-unit id="deck.observe">
+        <source>Look closer</source>
+        <target>觀察玳瑁</target>
+      </trans-unit>
+      <trans-unit id="deck.story">
+        <source>Your perspective</source>
+        <target>你的觀點</target>
+      </trans-unit>
+      <trans-unit id="deck.quiz">
+        <source>Try a question</source>
+        <target>情境挑戰</target>
+      </trans-unit>
+      <trans-unit id="deck.actions">
+        <source>Choose your actions</source>
+        <target>選擇保育行動</target>
+      </trans-unit>
+      <trans-unit id="deck.sources">
+        <source>Sources &amp; credits</source>
+        <target>資料與圖片來源</target>
+      </trans-unit>
+      <trans-unit id="deck.more">
+        <source>Keep wondering</source>
+        <target>繼續想一想</target>
+      </trans-unit>
+      <trans-unit id="deck.navigation">
+        <source>Guide pages</source>
+        <target>導覽分頁</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>
