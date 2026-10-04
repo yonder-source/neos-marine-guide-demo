@@ -21,7 +21,15 @@ The Traditional Chinese route is `/zh`. English adult content uses `/`; children
 
 Dev Containers can reuse the host’s configured HTTPS Git credential helper. SSH agent forwarding is not configured by this project.
 
-If port 8081 is in use, set `NEOS_HTTP_PORT=8082` in an untracked `.env` file before reopening the Dev Container, then open port 8082 instead.
+To use a different host port, e.g., port 8083, set `NEOS_HTTP_PORT=8083` in an untracked `.env` file in the repository root, then run `Dev Containers: Rebuild and Reopen in Container`. Open http://localhost:8083; the Neos backend is at http://localhost:8083/neos. The expected Docker port mapping is `8083:8081`: the application still listens on port 8081 inside the container.
+
+Changing `.env` or restarting the existing container does not update its published ports. If the mapping still shows `8081:8081`, run the following command from a host terminal in the repository root, then reopen the Dev Container:
+
+```bash
+docker compose up -d --force-recreate neos
+```
+
+This recreates the application container with the configured port and preserves the database volume.
 
 ## Initial setup
 
@@ -75,7 +83,7 @@ This sequence is for an existing site with English and Chinese content created b
 
 Plumber is installed as a Composer development dependency. Generate page requests, then browse http://localhost:8081/plumber.
 
-Footprint Sentinel is loaded on the homepage for local measurement. It reports resource transfer bytes and highlights large resources, excluding its own modules from the measurements. Use `?sentinel=off` to hide it for the current tab, including subsequent navigation; use `?sentinel=on` to show it again. To remove it after measurement, remove the `footprintSentinel` script include from `Page.fusion`.
+Footprint Sentinel is disabled by default. Use `?sentinel=on` to enable local measurement for the current tab, including subsequent navigation. It reports resource transfer bytes and highlights large resources, excluding its own modules from the measurements. Use `?sentinel=off` to hide it for the current tab, including subsequent navigation. To remove it after measurement, remove the `footprintSentinel` script include from `Page.fusion`.
 
 ## Running without VS Code
 
