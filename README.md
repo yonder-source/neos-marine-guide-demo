@@ -8,37 +8,30 @@ Install Docker with Compose support, VS Code, and the Dev Containers extension o
 
 1. Clone this repository on the host using HTTPS and open the folder in VS Code.
 2. Run `Dev Containers: Reopen in Container` from the Command Palette.
-3. Wait for the container to build, then complete the initial setup below.
+3. Wait for the container to build and finish initialization.
 4. Open http://localhost:8081; the Neos backend is at http://localhost:8081/neos.
 
 The Dev Container uses `compose.yaml` to start the application and database. You do not need to run `docker compose up` separately. Run all PHP, Composer, and Flow commands in the VS Code terminal inside the Dev Container.
 
-For a fresh checkout of this version, temporarily set `"overrideCommand": true` in `.devcontainer/devcontainer.json` before reopening. This keeps the container running while you install dependencies and initialize the site.
+On startup, the container installs the dependencies pinned in `composer.lock`, runs database migrations, sets up the Content Repository, creates the Collection site if no site exists, and publishes resources. Existing sites are preserved. If dependency installation or initialization fails, the container stops and logs the error.
+
+View startup output in the Dev Containers log (`Dev Containers: Show Container Log`).
 
 The Traditional Chinese route is `/zh`. English adult content uses `/`; children and expert content use `/children` and `/experts`.
 
+Dev Containers can reuse the host’s configured HTTPS Git credential helper. SSH agent forwarding is not configured by this project.
+
+If port 8081 is in use, set `NEOS_HTTP_PORT=8082` in an untracked `.env` file before reopening the Dev Container, then open port 8082 instead.
+
 ## Initial setup
 
-This version requires manual initialization inside the Dev Container.
+Compose and the Dev Container share `scripts/start-dev.sh` for initialization. After changing the Dev Container configuration, run `Dev Containers: Rebuild and Reopen in Container`. The first build may take several minutes to download dependencies.
 
-Install the locked dependencies, configure the database, and create the site inside the Dev Container:
+After changing Composer packages, rescan packages inside the Dev Container:
 
 ```bash
-composer install
 ./flow neos.flow:package:rescan
-./flow doctrine:migrate
-./flow cr:setup
-./flow site:create --node-name collection 'Marine Guide Demo' Collection.Site Collection.Site:Document.Homepage
-./flow resource:publish
 ```
-
-After initialization, start the development server in the container terminal:
-
-```bash
-./flow server:run --host 0.0.0.0 --port 8081
-```
-
-Keep this terminal running while using the site. Once the workspace is initialized, set `"overrideCommand": false` and run `Dev Containers: Rebuild and Reopen in Container` to let Compose start the server on subsequent launches.
 
 Database connection settings are in `Configuration/Development/Docker/Settings.yaml` and use the local Compose `db` service. Do not recreate an existing site.
 
@@ -79,3 +72,14 @@ This sequence is for an existing site with English and Chinese content created b
 Plumber is installed as a Composer development dependency. Generate page requests, then browse http://localhost:8081/plumber.
 
 Footprint Sentinel is loaded on the homepage for local measurement. It reports resource transfer bytes and highlights large resources, excluding its own modules from the measurements. Use `?sentinel=off` to hide it for the current tab, including subsequent navigation; use `?sentinel=on` to show it again. To remove it after measurement, remove the `footprintSentinel` script include from `Page.fusion`.
+
+## Running without VS Code
+
+As an alternative to the Dev Container workflow, run the same stack from the host:
+
+```bash
+docker compose up -d --build
+docker compose logs -f neos
+```
+
+Run application commands with `docker compose exec neos`, for example `docker compose exec neos ./flow cache:flush`.
