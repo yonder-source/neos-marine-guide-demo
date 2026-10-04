@@ -1,0 +1,9 @@
+[
+    {
+        "name": "典藏與分眾導覽",
+        "nodeName": "collection",
+        "siteResourcesPackageKey": "Collection.Site",
+        "online": true,
+        "domains": []
+    }
+]

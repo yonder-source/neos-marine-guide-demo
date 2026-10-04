@@ -13,7 +13,7 @@ Install Docker with Compose support, VS Code, and the Dev Containers extension o
 
 The Dev Container uses `compose.yaml` to start the application and database. You do not need to run `docker compose up` separately. Run all PHP, Composer, and Flow commands in the VS Code terminal inside the Dev Container.
 
-On startup, the container installs the dependencies pinned in `composer.lock`, runs database migrations, sets up the Content Repository, creates the Collection site if no site exists, and publishes resources. Existing sites are preserved. If dependency installation or initialization fails, the container stops and logs the error.
+On startup, the container installs the dependencies pinned in `composer.lock`, runs database migrations, sets up the Content Repository, imports the complete bilingual Collection demo if no site exists, and publishes resources. Existing sites are preserved. If dependency installation or initialization fails, the container stops and logs the error.
 
 View startup output in the Dev Containers log (`Dev Containers: Show Container Log`).
 
@@ -41,14 +41,18 @@ Create a local administrator inside the Dev Container:
 ./flow user:create <username> <password> <first-name> <last-name> --roles Administrator
 ```
 
-A new site starts with demo defaults defined in the NodeTypes. Create a Traditional Chinese language variant in the Neos backend. Create children and expert variants for each language, then edit their content:
+The committed `DistributionPackages/Collection.Site/Resources/Private/Content/` contains the original published English and Traditional Chinese demo, all three audiences, and the referenced image, recovered from the legacy Neos database. It uses Neos 9.1's native content export format; XLIFF supplies interface labels.
+
+On first startup with an empty database, `scripts/start-dev.sh` runs `./flow marine:initializedemo` after database migrations and Content Repository setup. This imports all six language/audience variants automatically. English routes are `/`, `/children`, `/experts`; Traditional Chinese routes are `/zh`, `/zh-children`, `/zh-experts`.
+
+For manual initialization after `./flow doctrine:migrate` and `./flow cr:setup --content-repository default`, run:
 
 ```bash
-./flow content:createvariantsrecursively '{"language":"en","audience":"adult"}' '{"language":"en","audience":"children"}'
-./flow content:createvariantsrecursively '{"language":"en","audience":"adult"}' '{"language":"en","audience":"expert"}'
+./flow marine:initializedemo
+./flow resource:publish
 ```
 
-After creating the Chinese adult variant, repeat these commands with `zh` instead of `en`. Starting the containers does not automatically create all translated and audience-specific content.
+Existing sites are skipped and their content is preserved. Content without a site record causes initialization to stop. To reproduce the demo, use a fresh database volume; this command does not update an existing site's text. The imported demo already uses the current audience model and does not need the legacy migrations below.
 
 ## Upgrading an existing site to audience dimensions
 
