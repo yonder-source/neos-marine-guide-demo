@@ -1,0 +1,34 @@
+prototype(Collection.Site:Presentation.GuideImage) < prototype(Neos.Fusion:Component) {
+  asset = ${q(node).property('image')}
+  alt = ''
+  loading = 'lazy'
+  fetchPriority = null
+  sizes = '(max-width: 800px) 100vw, 50vw'
+
+  imageSource = Sitegeist.Kaleidoscope:AssetImageSource {
+    asset = ${q(node).property('image')}
+  }
+
+  renderer = afx`
+    <Sitegeist.Kaleidoscope:Image
+      @if.hasAsset={props.asset}
+      imageSource={props.imageSource}
+      srcset="320w, 480w, 640w, 768w, 1024w, 1280w"
+      sizes={props.sizes}
+      width="768"
+      quality={55}
+      alt={props.alt}
+      loading={props.loading}
+      attributes.fetchpriority={props.fetchPriority}
+    />
+    <img
+      @if.noAsset={!props.asset}
+      src={StaticResource.uri('Collection.Site', 'Public/Images/hawksbill.jpg')}
+      alt={props.alt}
+      width="1280"
+      height="890"
+      loading={props.loading}
+      fetchpriority={props.fetchPriority}
+    />
+  `
+}

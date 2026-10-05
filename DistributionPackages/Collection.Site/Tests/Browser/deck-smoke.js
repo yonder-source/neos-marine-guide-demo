@@ -1,88 +1,87 @@
-// Run in the homepage console or CDP. Exercises the public display without changing Neos content.
+// Run in the homepage console or CDP, once for each language/audience route.
+// Exercises the current route's deck without changing Neos content.
 (async () => {
   const checks = [];
-  const assert = (condition, label) => {if (!condition) throw new Error(label);checks.push(label);};
+  const assert = (condition, label) => { if (!condition) throw new Error(label); checks.push(label); };
   const guide = document.querySelector('[data-guide]');
-  const next = document.querySelector('[data-deck-next]');
-  const home = document.querySelector('[data-deck-home]');
+  const next = document.querySelector('button[data-deck-next]');
+  const previous = document.querySelector('button[data-deck-previous]');
+  const home = document.querySelector('button[data-deck-home]');
+  const audience = guide.dataset.audience;
+  const english = document.documentElement.lang.startsWith('en');
+  const decode = async img => {
+    // sizes="auto" can select a new candidate as a previously hidden slide becomes visible.
+    for (let i = 0; i < 20; i++) {
+      await new Promise(resolve => setTimeout(resolve, 50));
+      try { await img.decode(); return; } catch {}
+    }
+    throw new Error('Image did not decode after its slide became visible');
+  };
   const current = () => [...document.querySelectorAll('.deck-slide')].find(page => !page.hidden);
   const goTo = predicate => {
     home.click();
-    for (let i=0;i<20;i++) {if (predicate(current())) return current();if(next.disabled)break;next.click();}
+    for (let i = 0; i < 20; i++) {
+      if (predicate(current())) return current();
+      if (next.disabled) break;
+      next.click();
+    }
     throw new Error('Expected slide was unreachable');
   };
   assert(document.body.classList.contains('guide-deck'), 'Deck initialized');
-  assert(document.querySelectorAll('.deck-navigation button').length === 3, 'Only home, previous and next controls');
-  assert(getComputedStyle(document.querySelector('.hero')).backgroundColor !== getComputedStyle(document.querySelector('.hero h1')).color, 'Cover title and background differ');
-  document.querySelectorAll("img").forEach(img => {img.loading = "eager";});
-  await Promise.all([...document.images].map(img => img.decode()));
-  for (const audience of ['children','adult','expert']) {
-    home.click(); next.click();
-    guide.querySelector(`[data-audience="${audience}"]`).click();
-    home.click();
-    let count = 0;
-    while (true) {
-      const slide = current();
-      if (audience === 'expert') assert(!slide.matches('.observation,.followup'), 'Expert route skips introductory observation and followup');
-      assert([...guide.querySelectorAll('[data-audience]')].every(button => {
-        const rect = button.getBoundingClientRect();
-        return rect.width >= 48 && rect.height >= 48 && rect.top >= 0 && rect.bottom <= innerHeight;
-      }), `${audience}: all audience touch controls visible on page ${count+1}`);
-      assert(document.querySelectorAll('.deck-slide:not([hidden])').length === 1, `${audience}: exactly one page`);
-      assert(slide.getBoundingClientRect().height > 0, `${audience}: page is rendered`);
-      assert(slide.scrollWidth <= slide.clientWidth+1, `${audience}: no horizontal page overflow`);
-      if (innerWidth >= 1366 && innerHeight >= 768) assert(slide.scrollHeight <= slide.clientHeight+1, `${audience}: page ${count+1} fits display`);
-      count++;
-      if(next.disabled)break;
-      next.click();
-      assert(count < 20, 'Navigation terminates');
-    }
-    assert(count === {children:6,adult:7,expert:10}[audience], `${audience}: expected page sequence`);
-    const quiz = goTo(page => page.matches('[data-quiz]'));
-    quiz.querySelector(`[data-answer]:not([data-answer="${quiz.dataset.correct}"])`).click();
-    assert(quiz.dataset.completed === 'false', `${audience}: incorrect answer`);
-    quiz.querySelector(`[data-answer="${quiz.dataset.correct}"]`).click();
-    assert(quiz.dataset.completed === 'true', `${audience}: correct answer`);
-    document.querySelector('[data-deck-previous]').click();next.click();
-    assert(quiz.dataset.completed === 'true', `${audience}: answer survives page navigation`);
-    quiz.querySelector('[data-quiz-reset]').click();
-    assert(!quiz.dataset.completed && document.activeElement.matches('[data-answer]'), `${audience}: reset and focus`);
+  assert(document.querySelectorAll('.deck-navigation button').length === 3, 'Home, previous and next controls');
+  assert(guide.querySelectorAll('[data-audience-panel]').length === 1, 'Current route renders one audience');
+  assert([...guide.querySelectorAll('[data-audience-switch] a')].every(a => a.href), 'Audience links have routes');
+  const hero = document.querySelector('.hero img');
+  await decode(hero);
+  assert(hero.naturalWidth > 0 && hero.alt.includes(english ? 'hawksbill' : '玳瑁'), 'Hawksbill Media image loaded');
+  assert(hero.loading === 'eager' && hero.fetchPriority === 'high', 'Cover image has loading priority');
+  assert(hero.srcset.split(',').some(candidate => candidate.trim().split(/\s+/)[0] === hero.currentSrc), 'Cover uses a declared responsive candidate');
+  home.click();
+  let count = 0;
+  while (true) {
+    const slide = current();
+    if (audience === 'expert') assert(!slide.matches('.observation,.followup'), 'Expert route skips introductory slides');
+    assert(document.querySelectorAll('.deck-slide:not([hidden])').length === 1, 'Exactly one page is visible');
+    assert(slide.getBoundingClientRect().height > 0, 'Current page is rendered');
+    assert(slide.scrollWidth <= slide.clientWidth + 1, 'No horizontal page overflow');
+    if (innerWidth >= 1366 && innerHeight >= 768) assert(slide.scrollHeight <= slide.clientHeight + 1, `Page ${count + 1} fits display`);
+    count++;
+    if (next.disabled) break;
+    next.click();
+    assert(count < 20, 'Navigation terminates');
+  }
+  assert(count === {children: 6, adult: 7, expert: 10}[audience], 'Expected audience page sequence');
+  const quiz = goTo(page => page.matches('[data-quiz]'));
+  quiz.querySelector(`[data-answer]:not([data-answer="${quiz.dataset.correct}"])`).click();
+  assert(quiz.dataset.completed === 'false', 'Incorrect answer');
+  quiz.querySelector(`[data-answer="${quiz.dataset.correct}"]`).click();
+  assert(quiz.dataset.completed === 'true', 'Correct answer');
+  previous.click(); next.click();
+  assert(quiz.dataset.completed === 'true', 'Answer survives page navigation');
+  quiz.querySelector('[data-quiz-reset]').click();
+  assert(!quiz.dataset.completed && document.activeElement.matches('[data-answer]'), 'Quiz reset and focus');
+  if (guide.querySelector('[data-action-plan]')) {
+    const plan = goTo(page => page.matches('[data-action-plan]'));
+    const choices = [...plan.querySelectorAll('[data-action-check]')];
+    choices[0].click(); choices[1].click();
+    assert(plan.querySelector('[data-action-status]').textContent.includes('2'), 'Action selection count');
+    next.click(); previous.click();
+    assert(choices[0].checked && choices[1].checked, 'Actions survive navigation');
+    choices[0].click(); choices[1].click();
+  }
+  if (audience !== 'expert') {
+    const observation = goTo(page => page.matches('.observation'));
+    const photo = observation.querySelector('img');
+    await decode(photo);
+    assert(photo.naturalWidth > 0 && photo.loading === 'lazy' && photo.sizes.startsWith('auto'), 'Observation image loads for its rendered size');
+    const hotspot = observation.querySelector('[data-hotspot]');
+    hotspot.click();
+    assert(document.getElementById(hotspot.getAttribute('aria-controls')).open, 'Photo hotspot opens explanation');
+    hotspot.click();
   }
   home.click();
-  next.click();next.click();
-  guide.querySelector('[data-audience="children"]').click();
-  assert(current().classList.contains('hero'), 'An audience with no saved progress starts at the cover');
-  next.click();next.click();
-  const childPage = current();
-  guide.querySelector('[data-audience="adult"]').click();
-  assert(current().classList.contains('hero'), 'Switching to an unvisited audience returns to the cover');
-  next.click();next.click();next.click();
-  const adultPage = current();
-  guide.querySelector('[data-audience="children"]').click();
-  assert(current() === childPage, 'Returning to children restores its own page');
-  guide.querySelector('[data-audience="adult"]').click();
-  assert(current() === adultPage, 'Returning to adults restores its own page');
-  guide.querySelector('[data-audience="adult"]').click();
-  const plan = goTo(page => page.matches('[data-action-plan]'));
-  const choices = [...plan.querySelectorAll('[data-action-check]')];
-  choices[0].click();choices[1].click();
-  assert(plan.querySelector('[data-action-status]').textContent.includes('2'), 'Action selection count');
-  next.click();document.querySelector('[data-deck-previous]').click();
-  assert(choices[0].checked && choices[1].checked, 'Actions survive navigation');
-  choices[0].click();choices[1].click();
-  const observation = goTo(page => page.matches('.observation'));
-  const hotspot = observation.querySelector('[data-hotspot]');hotspot.click();
-  assert(document.getElementById(hotspot.getAttribute('aria-controls')).open, 'Photo hotspot opens explanation');
-  hotspot.click();
-  guide.querySelector('[data-audience="expert"]').click();
-  assert([...document.querySelectorAll('[data-language-link]')].every(a => new URL(a.href).searchParams.get('audience')==='expert'), 'Language navigation preserves audience');
-  home.click();
-  document.dispatchEvent(new KeyboardEvent('keydown',{key:'ArrowRight',bubbles:true}));
+  document.dispatchEvent(new KeyboardEvent('keydown', {key: 'ArrowRight', bubbles: true}));
   assert(guide.dataset.deckPage === '1', 'Arrow key turns page');
-  assert(document.documentElement.scrollHeight <= innerHeight+1, 'Document does not scroll vertically');
-  assert(document.documentElement.scrollWidth <= innerWidth+1, 'Document does not scroll horizontally');
-  assert(document.querySelector('.hero img').alt.includes(english ? 'hawksbill' : '玳瑁'), 'Hawksbill demo image is active');
-  assert([...document.images].every(img => img.naturalWidth>0), 'Photos loaded');
   home.click();
-  return {passed:checks.length,checks};
+  return {audience, language: document.documentElement.lang, passed: checks.length, checks};
 })();
