@@ -13,7 +13,7 @@ Install Docker with Compose support, VS Code, and the Dev Containers extension o
 
 The Dev Container uses `compose.yaml` to start the application and database. You do not need to run `docker compose up` separately. Run all PHP, Composer, and Flow commands in the VS Code terminal inside the Dev Container.
 
-On startup, the container installs the dependencies pinned in `composer.lock`, runs database migrations, sets up the Content Repository, creates the Collection site if no site exists, and publishes resources. Existing sites are preserved. If dependency installation or initialization fails, the container stops and logs the error.
+On startup, the container installs the dependencies pinned in `composer.lock`, runs database migrations, sets up the Content Repository, imports the complete bilingual Collection demo if no site exists, and publishes resources. Existing sites are preserved. If dependency installation or initialization fails, the container stops and logs the error.
 
 View startup output in the Dev Containers log (`Dev Containers: Show Container Log`).
 
@@ -21,7 +21,15 @@ The Traditional Chinese route is `/zh`. English adult content uses `/`; children
 
 Dev Containers can reuse the host’s configured HTTPS Git credential helper. SSH agent forwarding is not configured by this project.
 
-If port 8081 is in use, set `NEOS_HTTP_PORT=8082` in an untracked `.env` file before reopening the Dev Container, then open port 8082 instead.
+To use a different host port, e.g., port 8083, set `NEOS_HTTP_PORT=8083` in an untracked `.env` file in the repository root, then run `Dev Containers: Rebuild and Reopen in Container`. Open http://localhost:8083; the Neos backend is at http://localhost:8083/neos. The expected Docker port mapping is `8083:8081`: the application still listens on port 8081 inside the container.
+
+Changing `.env` or restarting the existing container does not update its published ports. If the mapping still shows `8081:8081`, run the following command from a host terminal in the repository root, then reopen the Dev Container:
+
+```bash
+docker compose up -d --force-recreate neos
+```
+
+This recreates the application container with the configured port and preserves the database volume.
 
 ## Initial setup
 
@@ -41,14 +49,18 @@ Create a local administrator inside the Dev Container:
 ./flow user:create <username> <password> <first-name> <last-name> --roles Administrator
 ```
 
-A new site starts with demo defaults defined in the NodeTypes. Create a Traditional Chinese language variant in the Neos backend. Create children and expert variants for each language, then edit their content:
+The committed `DistributionPackages/Collection.Site/Resources/Private/Content/` contains the original published English and Traditional Chinese demo, all three audiences, and the referenced image, recovered from the legacy Neos database. It uses Neos 9.1's native content export format; XLIFF supplies interface labels.
+
+On first startup with an empty database, `scripts/start-dev.sh` runs `./flow marine:initializedemo` after database migrations and Content Repository setup. This imports all six language/audience variants automatically. English routes are `/`, `/children`, `/experts`; Traditional Chinese routes are `/zh`, `/zh-children`, `/zh-experts`.
+
+For manual initialization after `./flow doctrine:migrate` and `./flow cr:setup --content-repository default`, run:
 
 ```bash
-./flow content:createvariantsrecursively '{"language":"en","audience":"adult"}' '{"language":"en","audience":"children"}'
-./flow content:createvariantsrecursively '{"language":"en","audience":"adult"}' '{"language":"en","audience":"expert"}'
+./flow marine:initializedemo
+./flow resource:publish
 ```
 
-After creating the Chinese adult variant, repeat these commands with `zh` instead of `en`. Starting the containers does not automatically create all translated and audience-specific content.
+Existing sites are skipped and their content is preserved. Content without a site record causes initialization to stop. To reproduce the demo, use a fresh database volume; this command does not update an existing site's text. The imported demo already uses the current audience model and does not need the legacy migrations below.
 
 ## Upgrading an existing site to audience dimensions
 
@@ -71,7 +83,7 @@ This sequence is for an existing site with English and Chinese content created b
 
 Plumber is installed as a Composer development dependency. Generate page requests, then browse http://localhost:8081/plumber.
 
-Footprint Sentinel is loaded on the homepage for local measurement. It reports resource transfer bytes and highlights large resources, excluding its own modules from the measurements. Use `?sentinel=off` to hide it for the current tab, including subsequent navigation; use `?sentinel=on` to show it again. To remove it after measurement, remove the `footprintSentinel` script include from `Page.fusion`.
+Footprint Sentinel is disabled by default. Use `?sentinel=on` to enable local measurement for the current tab, including subsequent navigation. It reports resource transfer bytes and highlights large resources, excluding its own modules from the measurements. Use `?sentinel=off` to hide it for the current tab, including subsequent navigation. To remove it after measurement, remove the `footprintSentinel` script include from `Page.fusion`.
 
 ## Running without VS Code
 

@@ -1,0 +1,14 @@
+{
+    "identifier": "188cf7ce-c753-4557-a2fa-f32ca936cbd6",
+    "type": "IMAGE",
+    "title": "Hawksbill turtle",
+    "copyrightNotice": "",
+    "caption": "",
+    "assetSourceIdentifier": "neos",
+    "resource": {
+        "filename": "hawksbill.jpg",
+        "collectionName": "persistent",
+        "mediaType": "image\/jpeg",
+        "sha1": "850e8311c05263244e632d453346aba47bb18805"
+    }
+}

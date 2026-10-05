@@ -7,14 +7,14 @@ cd /app
 composer install --no-interaction --prefer-dist
 test -x ./flow
 
+# Discover newly added package commands when reusing a development checkout.
+./flow flow:cache:flush --force
+
 # These commands also support an existing development database.
 ./flow doctrine:migrate
 ./flow cr:setup --content-repository default
 
-sites=$(./flow site:list)
-if printf '%s\n' "$sites" | grep -q 'No sites available'; then
-    ./flow site:create --node-name collection '典藏與分眾導覽' Collection.Site Collection.Site:Document.Homepage
-fi
+./flow marine:initializedemo
 
 ./flow resource:publish
 exec ./flow server:run --host 0.0.0.0 --port 8081
