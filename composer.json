@@ -24,7 +24,8 @@
         "neos/contentgraph-doctrinedbaladapter": "~9.1.0",
         "neos/neos-ui": "~9.1.0",
         "neos/seo": "~4.1",
-        "collection/site": "@dev"
+        "collection/site": "@dev",
+        "sitegeist/kaleidoscope": "^7.2"
     },
     "require-dev": {
         "neos/buildessentials": "~9.1.0",

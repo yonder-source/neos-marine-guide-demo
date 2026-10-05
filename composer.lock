@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "99da4c99e12d15d56659c811fdd5ce33",
+    "content-hash": "cd46896ce878f044c569e2da7474bf0b",
     "packages": [
         {
             "name": "behat/transliterator",
@@ -117,7 +117,7 @@
         },
         {
             "name": "collection/site",
-            "version": "dev-feat/marine-guide-templates",
+            "version": "dev-feat/responsive-media-images",
             "dist": {
                 "type": "path",
                 "url": "./DistributionPackages/Collection.Site",
@@ -6579,6 +6579,53 @@
                 "source": "https://github.com/Seldaek/signal-handler/tree/2.0.2"
             },
             "time": "2023-09-03T09:24:00+00:00"
+        },
+        {
+            "name": "sitegeist/kaleidoscope",
+            "version": "v7.2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/sitegeist/Sitegeist.Kaleidoscope.git",
+                "reference": "39875c552a86e8ba6de803e2f4f2b5a4cad4ed16"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/sitegeist/Sitegeist.Kaleidoscope/zipball/39875c552a86e8ba6de803e2f4f2b5a4cad4ed16",
+                "reference": "39875c552a86e8ba6de803e2f4f2b5a4cad4ed16",
+                "shasum": ""
+            },
+            "require": {
+                "neos/fusion-afx": "^8.3 || ^9.0 || dev-master",
+                "neos/imagine": "*",
+                "neos/media": "*",
+                "neos/neos": "^8.3 || ^9.0 || dev-master"
+            },
+            "require-dev": {
+                "phpstan/phpstan": "^1.8",
+                "phpunit/phpunit": "^9.5",
+                "squizlabs/php_codesniffer": "^3.7"
+            },
+            "type": "neos-package",
+            "extra": {
+                "neos": {
+                    "package-key": "Sitegeist.Kaleidoscope"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Sitegeist\\Kaleidoscope\\": "Classes/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPL-3.0-or-later"
+            ],
+            "description": "Responsive-images for Neos",
+            "support": {
+                "issues": "https://github.com/sitegeist/Sitegeist.Kaleidoscope/issues",
+                "source": "https://github.com/sitegeist/Sitegeist.Kaleidoscope/tree/v7.2.0"
+            },
+            "time": "2026-08-18T09:28:03+00:00"
         },
         {
             "name": "symfony/console",

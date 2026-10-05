@@ -85,6 +85,14 @@ Plumber is installed as a Composer development dependency. Generate page request
 
 Footprint Sentinel is disabled by default. Use `?sentinel=on` to enable local measurement for the current tab, including subsequent navigation. It reports resource transfer bytes and highlights large resources, excluding its own modules from the measurements. Use `?sentinel=off` to hide it for the current tab, including subsequent navigation. To remove it after measurement, remove the `footprintSentinel` script include from `Page.fusion`.
 
+The homepage cover and guide observation use the image selected in the Neos Media field. `Collection.Site:Presentation.GuideImage` passes that asset to Kaleidoscope, which asks Neos Media for 320, 480, 640, 768, 1024, and 1280 pixel thumbnails and renders a `srcset`. The cover's `sizes` follows its full-width mobile and half-width desktop slide layout. The lazy observation image uses `sizes="auto"` to select for its actual rendered width, with explicit sizes for browsers without that support. The cover loads eagerly with high priority. If the image field is empty, the bundled hawksbill image is used as a fallback. Replacing the Media asset in the Neos backend updates both images without editing Fusion. The source image limits the largest useful candidate; the imported hawksbill photo is 1280 pixels wide.
+
+JPEG quality 55 is a deliberate tradeoff for this demo photo: the 1280 pixel derivative is about 196 KiB instead of the original 435 KiB; the 1024 pixel derivative is about 92 KiB. Inspect visual quality when changing the source asset, since this quality setting does not guarantee a byte limit for every photo. The vendored Sentinel matches images by `currentSrc`, so a loaded candidate does not flag other images merely because they list that URL in their `srcset`.
+
+For the responsive-image demo, Sentinel uses the same default thresholds at every viewport width: a 200 KiB per-resource cap and 10 KiB per 100 × 100 physical pixels of rendered area. The lower limit wins. These are diagnostic warnings, not a rule that every image must pass; the overall page rating uses separate thresholds.
+
+To compare, open `/?sentinel=on`, select a 390 CSS-pixel mobile viewport at DPR 2, disable the browser cache, and reload. Inspect `.hero-visual img` in DevTools: `currentSrc` should point to a smaller Neos Media thumbnail. Then use a 1440 CSS-pixel desktop viewport and reload to see a larger candidate. Reloading matters because browsers may retain a previously loaded larger candidate after a resize. A desktop or DPR 3 mobile image may still trigger Sentinel's 200 KiB warning; compare actual transfer bytes, displayed dimensions, DPR, and visual quality before deciding whether a change is warranted.
+
 ## Running without VS Code
 
 As an alternative to the Dev Container workflow, run the same stack from the host:

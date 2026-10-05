@@ -585,6 +585,14 @@ function ne(e) {
       [style]
     `), n = [];
   return t.forEach((s) => {
+    // A srcset lists candidates, but only currentSrc identifies the image that was loaded.
+    if (s instanceof HTMLImageElement) {
+      if (s.currentSrc && new URL(s.currentSrc, document.baseURI).href === e.href)
+        n.push(s);
+      return;
+    }
+    if (s instanceof HTMLSourceElement && s.parentElement instanceof HTMLPictureElement)
+      return;
     const o = e.pathname + e.search + e.hash, i = s.attributes;
     for (const u of i) {
       const l = u.value.toLowerCase(), r = o.toLowerCase();

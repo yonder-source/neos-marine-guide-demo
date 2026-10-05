@@ -3,7 +3,6 @@ prototype(Collection.Site:Document.Homepage) < prototype(Collection.Site:Present
   @cache.entryTags.descendants = ${Neos.Caching.descendantOfTag(node)}
   body = Neos.Fusion:Component {
     data = ${MarineGuide.content(node)}
-    imageUri = Collection.Site:Presentation.GuideImageUri
     heroTitle = ${q(node).property('heroTitle') != null ? q(node).property('heroTitle') : '讓玳瑁的回家路，少一點傷害。'}
     heroIntro = ${q(node).property('heroIntro') != null ? q(node).property('heroIntro') : '從一隻海龜出發：孩子學會心疼，大人找到行動，研究者追問保育是否有效。'}
     guides = ${q(node).children('[instanceof Collection.Site:Document.Guide]').get()}
@@ -12,7 +11,7 @@ prototype(Collection.Site:Document.Homepage) < prototype(Collection.Site:Present
       <main id="main" tabindex="-1">
         <section class="hero" aria-labelledby="hero-title">
           <div class="hero-copy"><p class="eyebrow">ONE TURTLE. THREE WAYS TO CARE.</p><h1 id="hero-title">{String.htmlSpecialChars(props.heroTitle)}</h1><p class="hero-intro">{String.htmlSpecialChars(props.heroIntro)}</p><a class="primary-button" href="#guide"><Collection.Site:Presentation.Label labelKey="hero.start" /> <span aria-hidden="true">↘</span></a><div class="hero-meta"><span><Collection.Site:Presentation.Label labelKey="hero.location" /></span><span><Collection.Site:Presentation.Label labelKey="hero.perspectives" /></span></div></div>
-          <div class="hero-visual"><img src={props.imageUri} alt={props.data.imageAlt} width="1280" height="890" fetchpriority="high" /><div class="hero-photo-note"><span>FEATURED ENCOUNTER</span><strong>{String.htmlSpecialChars(props.data.guideTitle)}</strong></div><span class="hero-coordinate" aria-hidden="true">LOOK CLOSER / DIVE DEEPER</span></div>
+          <div class="hero-visual"><Collection.Site:Presentation.GuideImage alt={props.data.imageAlt} loading="eager" fetchPriority="high" /><div class="hero-photo-note"><span>FEATURED ENCOUNTER</span><strong>{String.htmlSpecialChars(props.data.guideTitle)}</strong></div><span class="hero-coordinate" aria-hidden="true">LOOK CLOSER / DIVE DEEPER</span></div>
         </section>
         <div class="explore-intro"><span class="section-index">01 — EXPLORE</span><p><Collection.Site:Presentation.Label labelKey="explore.intro" /><strong><Collection.Site:Presentation.Label labelKey="explore.emphasis" /></strong></p><a href="#guide"><Collection.Site:Presentation.Label labelKey="explore.down" /> <span aria-hidden="true">↓</span></a></div>
         <div class="page-container" id="guide"><Collection.Site:Presentation.Guide /></div>

@@ -5,7 +5,6 @@ prototype(Collection.Site:Presentation.Guide) < prototype(Neos.Fusion:Component)
     presets = ${['children', 'adult', 'expert']}
   }
   id = ${'marine-' + node.aggregateId.value}
-  imageUri = Collection.Site:Presentation.GuideImageUri
   renderer = afx`
     <article class="guide" data-guide data-audience={props.data.audience} data-language={MarineGuide.language(documentNode)} id={props.id}
       data-deck-previous={MarineGuide.label('deck.previous', documentNode)}
@@ -36,7 +35,7 @@ prototype(Collection.Site:Presentation.Guide) < prototype(Neos.Fusion:Component)
         <div class="observation">
           <figure class="observation-figure">
             <div class="observation-image">
-              <img src={props.imageUri} alt={props.data.imageAlt} width="1280" height="890" loading="lazy" />
+              <Collection.Site:Presentation.GuideImage alt={props.data.imageAlt} sizes="auto, (max-width: 800px) 100vw, 50vw" />
               <span class="photo-label"><Collection.Site:Presentation.Label labelKey="photo.hint" /></span>
               <button class="hotspot hotspot-one" type="button" data-hotspot="one" style={'--spot-x: ' + props.data.observationOneX + '%; --spot-y: ' + props.data.observationOneY + '%'} aria-controls={props.id + '-observation-one'} aria-expanded="false" aria-label={props.data.observationOneTitle} hidden>1</button>
               <button class="hotspot hotspot-two" type="button" data-hotspot="two" style={'--spot-x: ' + props.data.observationTwoX + '%; --spot-y: ' + props.data.observationTwoY + '%'} aria-controls={props.id + '-observation-two'} aria-expanded="false" aria-label={props.data.observationTwoTitle} hidden>2</button>
