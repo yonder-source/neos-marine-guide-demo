@@ -1021,9 +1021,16 @@ class V {
    * through some kind of event listener or observer. We tried a MutationObserver, but it did not work.
    */
   watch() {
-    window.addEventListener("DOMContentLoaded", () => {
+    const start = () => {
       this._documentLoadedTimestampMs = Date.now(), this.scheduleNextUpdate(!0);
-    }), window.addEventListener("scroll", () => {
+    };
+    // Dynamic imports can finish after DOMContentLoaded has already fired.
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", start, { once: true });
+    } else {
+      start();
+    }
+    window.addEventListener("scroll", () => {
       this.scheduleNextUpdate(!0);
     }), window.addEventListener("resize", () => {
       this.scheduleNextUpdate(!0);
