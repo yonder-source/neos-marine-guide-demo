@@ -31,6 +31,14 @@ docker compose up -d --force-recreate neos
 
 This recreates the application container with the configured port and preserves the database volume.
 
+### PHP security updates
+
+The development image tracks PHP 8.4 on Debian Bookworm. `build.pull: true` is configured in `compose.yaml` to ensures each build checks for an updated base image, including available PHP 8.4 security patches.
+
+After pulling repository updates, run **Dev Containers: Rebuild and Reopen in Container** to update the development environment. Reopening an existing container does not update its PHP version.
+
+Run `php -v` inside the container to confirm the installed version.
+
 ## Initial setup
 
 Compose and the Dev Container share `scripts/start-dev.sh` for initialization. After changing the Dev Container configuration, run `Dev Containers: Rebuild and Reopen in Container`. The first build may take several minutes to download dependencies.
